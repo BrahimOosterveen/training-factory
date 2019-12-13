@@ -1,0 +1,67 @@
+{% extends 'instructeur.html.twig' %}
+
+{% block nav %}
+    <ul class="navbar-nav" style="text-decoration: underline red">
+        <li class="nav-item ">
+            <a class="nav-link text-danger"  href="../home.html.twig">Home <span class="sr-only ">(current)</span></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-danger" href="../inschrijven.html.twig">plannen lessen</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-danger" href="../inschrijvingen.html.twig"><b>lessen beheer</b></a>
+        </li>
+
+    </ul>
+{% endblock %}
+
+
+{% block body %}
+    <h4 style="margin: 50px 0px 0px 50px;">Overzicht inschrijvingen</h4>
+    <table class="table table-bordered " style="margin: 50px">
+        <thead>
+        <tr>
+            <th scope="col">Datum</th>
+            <th scope="col">Tijd</th>
+            <th scope="col">Sport</th>
+            <th scope="col">Aantal ingeschreven deelnemers</th>
+            <th scope="col">Deelnemerslijst</th>
+            <th scope="col">Aanpassen</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>22-04-2017</td>
+            <td>09:00</td>
+            <td>MMA</td>
+            <td>6</td>
+            <td>Lijst</td>
+            <td style="text-align: center">Edit</td>
+        </tr>
+        <tr>
+            <td>24-06-2017</td>
+            <td>11:00</td>
+            <td>Kickboksen</td>
+            <td>8</td>
+            <td>Lijst</td>
+            <td style="text-align: center">Edit</td>
+        </tr>
+        <tr>
+            <td>28-07-2017</td>
+            <td>12:45</td>
+            <td>Stootzak training</td>
+            <td>12</td>
+            <td>Lijst</td>
+            <td style="text-align: center">Edit</td>
+        </tr>
+        <tr>
+            <td>29-08-2017</td>
+            <td>15:30</td>
+            <td>MMA</td>
+            <td>8</td>
+            <td>Lijst</td>
+            <td style="text-align: center">Edit</td>
+        </tr>
+        </tbody>
+    </table>
+{% endblock %}

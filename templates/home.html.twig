@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block nav %}
+    <ul class="navbar-nav" style="text-decoration: underline red">
+        <li class="nav-item ">
+            <a class="nav-link text-danger"  href="home.html.twig"><b>Home</b> <span class="sr-only ">(current)</span></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-danger" href="inschrijven.html.twig">Inschrijven op les</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-danger" href="inschrijvingen.html.twig">Overzicht inschrijvingen</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-danger" href="#" tabindex="-1" aria-disabled="true">Gegevens lid wijzigen</a>
+        </li>
+    </ul>
+{% endblock %}
+
+
+{% block body %}
+    <div style="margin: 70px 0px 0px 500px;">    <h4 >Welkom bij Trainigs Centrum Den Haag</h4>
+        <p>Den haag Training center is een sportschool waar onder professionele begeleiding<br> in een veilige omgeving verschillende soorten material arts-,indoor bootcamp,<br> personal- en small groups taining worden aageboden. Hier kan je je inschrijven <br> op een les of uitschrijven op een les</p></div>
+
+
+{% endblock %}

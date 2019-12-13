@@ -1,0 +1,75 @@
+{% extends '../admin/admin.html.twig' %}
+
+
+{% block nav %}
+    <ul class="navbar-nav" style="text-decoration: underline red">
+        <li class="nav-item ">
+            <a class="nav-link text-danger"  href="../home.html.twig">Home <span class="sr-only ">(current)</span></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-danger" href="../inschrijven.html.twig">Inschrijven op les</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-danger" href="../inschrijvingen.html.twig"><b>Overzicht inschrijvingen</b></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-danger" href="#" tabindex="-1" aria-disabled="true">Gegevens lid wijzigen</a>
+        </li>
+    </ul>
+{% endblock %}
+
+{% block body %}
+    <h4 style="margin: 50px 0px 0px 50px;">Overzicht Leden</h4>
+    <table class="table table-bordered " style="margin: 50px">
+        <thead>
+        <tr>
+            <th scope="col">Naam</th>
+            <th scope="col">Email</th>
+            <th scope="col">Adres</th>
+            <th scope="col">Woonplaats</th>
+            <th scope="col">Gebruikersnaam</th>
+            <th scope="col">Details</th>
+            <th scope="col">Verwijderen</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>22-04-2017</td>
+            <td>09:00</td>
+            <td>MMA</td>
+            <td>6</td>
+            <td>14</td>
+            <td style="text-align: center">✔</td>
+            <td style="text-align: center">X</td>
+        </tr>
+        <tr>
+            <td>24-06-2017</td>
+            <td>11:00</td>
+            <td>Kickboksen</td>
+            <td>8</td>
+            <td>14</td>
+            <td style="text-align: center">✔</td>
+            <td style="text-align: center">X</td>
+        </tr>
+        <tr>
+            <td>28-07-2017</td>
+            <td>12:45</td>
+            <td>Stootzak training</td>
+            <td>12</td>
+            <td>6</td>
+            <td style="text-align: center">✔</td>
+            <td style="text-align: center">X</td>
+        </tr>
+        <tr>
+            <td>29-08-2017</td>
+            <td>15:30</td>
+            <td>MMA</td>
+            <td>8</td>
+            <td>14</td>
+            <td style="text-align: center">✔</td>
+            <td style="text-align: center">X</td>
+        </tr>
+        </tbody>
+    </table>
+{% endblock %}

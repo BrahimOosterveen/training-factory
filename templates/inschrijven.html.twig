@@ -1,0 +1,186 @@
+{% extends 'base.html.twig' %}
+
+{% block nav %}
+    <ul class="navbar-nav" style="text-decoration: underline red">
+        <li class="nav-item ">
+            <a class="nav-link text-danger"  href="home.html.twig">Home <span class="sr-only ">(current)</span></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-danger" href="inschrijven.html.twig"><b>Inschrijven op les</b></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-danger" href="inschrijvingen.html.twig">Overzicht inschrijvingen</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-danger" href="#" tabindex="-1" aria-disabled="true">Gegevens lid wijzigen</a>
+        </li>
+    </ul>
+{% endblock %}
+
+{% block body %}
+<link rel="stylesheet" href="{{ asset('css/inschrijven.css') }}" />
+<h3 style="margin: 50px 0px 0px 50px;">Inschrijven op les</h3>
+    <ul class="schedule__tabs only-regular" role="tablist">
+        <li class="schedule__item">
+            <a class="is-active js-schedule-date"
+               onclick="ScheduleIndex.UpdateScheduleDesktop('04-12-2019')"
+               href="javascript:;"
+               id="date_04-12-2019"
+               title="woensdag 4 december 2019">Vandaag</a>
+        </li>
+        <li class="schedule__item">
+            <a class=" js-schedule-date"
+               onclick="ScheduleIndex.UpdateScheduleDesktop('05-12-2019')"
+               href="javascript:;"
+               id="date_05-12-2019"
+               title="donderdag 5 december 2019">Do 5 dec</a>
+        </li>
+        <li class="schedule__item">
+            <a class=" js-schedule-date"
+               onclick="ScheduleIndex.UpdateScheduleDesktop('06-12-2019')"
+               href="javascript:;"
+               id="date_06-12-2019"
+               title="vrijdag 6 december 2019">Vr 6 dec</a>
+        </li>
+        <li class="schedule__item">
+            <a class=" js-schedule-date"
+               onclick="ScheduleIndex.UpdateScheduleDesktop('07-12-2019')"
+               href="javascript:;"
+               id="date_07-12-2019"
+               title="zaterdag 7 december 2019">Za 7 dec</a>
+        </li>
+        <li class="schedule__item">
+            <a class=" js-schedule-date"
+               onclick="ScheduleIndex.UpdateScheduleDesktop('08-12-2019')"
+               href="javascript:;"
+               id="date_08-12-2019"
+               title="zondag 8 december 2019">Zo 8 dec</a>
+        </li>
+        <li class="schedule__item">
+            <a class=" js-schedule-date"
+               onclick="ScheduleIndex.UpdateScheduleDesktop('09-12-2019')"
+               href="javascript:;"
+               id="date_09-12-2019"
+               title="maandag 9 december 2019">Ma 9 dec</a>
+        </li>
+        <li class="schedule__item">
+            <a class=" js-schedule-date"
+               onclick="ScheduleIndex.UpdateScheduleDesktop('10-12-2019')"
+               href="javascript:;"
+               id="date_10-12-2019"
+               title="dinsdag 10 december 2019">Di 10 dec</a>
+        </li>
+        <li class="schedule__item">
+            <a class=" js-schedule-date"
+               onclick="ScheduleIndex.UpdateScheduleDesktop('11-12-2019')"
+               href="javascript:;"
+               id="date_11-12-2019"
+               title="woensdag 11 december 2019">Wo 11 dec</a>
+        </li>
+        <li class="schedule__item">
+            <a class=" js-schedule-date"
+               onclick="ScheduleIndex.UpdateScheduleDesktop('12-12-2019')"
+               href="javascript:;"
+               id="date_12-12-2019"
+               title="donderdag 12 december 2019">Do 12 dec</a>
+        </li>
+        <li class="schedule__item">
+            <a class=" js-schedule-date"
+               onclick="ScheduleIndex.UpdateScheduleDesktop('13-12-2019')"
+               href="javascript:;"
+               id="date_13-12-2019"
+               title="vrijdag 13 december 2019">Vr 13 dec</a>
+        </li>
+        <li class="schedule__item">
+            <a class=" js-schedule-date"
+               onclick="ScheduleIndex.UpdateScheduleDesktop('14-12-2019')"
+               href="javascript:;"
+               id="date_14-12-2019"
+               title="zaterdag 14 december 2019">Za 14 dec</a>
+        </li>
+        <li class="schedule__item">
+            <a class=" js-schedule-date"
+               onclick="ScheduleIndex.UpdateScheduleDesktop('15-12-2019')"
+               href="javascript:;"
+               id="date_15-12-2019"
+               title="zondag 15 december 2019">Zo 15 dec</a>
+        </li>
+        <li class="schedule__item">
+            <a class=" js-schedule-date"
+               onclick="ScheduleIndex.UpdateScheduleDesktop('16-12-2019')"
+               href="javascript:;"
+               id="date_16-12-2019"
+               title="maandag 16 december 2019">Ma 16 dec</a>
+        </li>
+        <li class="schedule__item">
+            <a class=" js-schedule-date"
+               onclick="ScheduleIndex.UpdateScheduleDesktop('17-12-2019')"
+               href="javascript:;"
+               id="date_17-12-2019"
+               title="dinsdag 17 december 2019">Di 17 dec</a>
+        </li>
+        <li class="schedule__item">
+            <a class=" js-schedule-date"
+               onclick="ScheduleIndex.UpdateScheduleDesktop('18-12-2019')"
+               href="javascript:;"
+               id="date_18-12-2019"
+               title="woensdag 18 december 2019">Wo 18 dec</a>
+        </li>
+        <li class="schedule__item">
+            <a href="javascript:;" class="js-tooltip-schedule">later</a>
+            <div class="tooltip hide">
+                <h3>Tickets nieuwe speelweek</h3>
+                <p>De speelweek van films bij de bioscopen van Path&#233; loopt van donderdag tot en met woensdag. Op elke maandag wordt het programma van de nieuwe speelweek geprogrammeerd. Het volledige programma van de nieuwe speelweek (vanaf elke donderdag) is vaak vanaf maandagavond verkrijgbaar.</p>
+            </div>
+        </li>
+    </ul>
+
+
+
+    <div class="table">
+    <div class="card mb-4" style="max-width: 540px; margin-left: 50px;">
+        <div class="row no-gutters">
+            <div class="col-md-4">
+                <img src="{{ asset('img/40402591_1797621563608171_7373067337957638144_o.jpg') }}" class="card-img" alt="...">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title">Stootzak training</h5>
+                    <p class="card-text">12:00 14:00 21:00</p>
+                    <p class="card-text">11-12-2019</p>
+                    <p class="card-text">Den haag</p>
+                    <p class="card-text">10</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="card mb-4" style="max-width: 540px; margin-left: 50px;">
+        <div class="row no-gutters">
+            <div class="col-md-4">
+                <img src="{{ asset('img/40402591_1797621563608171_7373067337957638144_o.jpg') }}" class="card-img" alt="...">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title">Stootzak training</h5>
+                    <p class="card-text">12:00 14:00 21:00</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card mb-4" style="max-width: 540px; margin-left: 50px;">
+        <div class="row no-gutters">
+            <div class="col-md-4">
+                <img src="{{ asset('img/40402591_1797621563608171_7373067337957638144_o.jpg') }}" class="card-img" alt="...">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title">Stootzak training</h5>
+                    <p class="card-text">12:00 14:00 21:00</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+{% endblock %}

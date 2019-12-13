@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    {% block stylesheets %}
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.0/css/bootstrap.min.css"
+              integrity="sha384-SI27wrMjH3ZZ89r4o+fGIJtnzkAnFs3E4qz9DIYioCQ5l9Rd/7UAa8DHcaL8jkWt"
+              crossorigin="anonymous">
+        <link rel="stylesheet" href="{{ asset('css/login.css') }}">
+
+    {% endblock %}
+</head>
+
+<body>
+<div class="d-flex">
+    <div class="p-2"><img src="{{ asset('img/logo.jpg') }}" class="img-fluid" style="width: 200px; height: auto;"
+                          alt="Responsive image"></div>
+    <div class="p-2"><h1 style="color: red; text-align: left">Training Centrum <br> Den Haag</h1></div>
+    <div class="p-2 ml-auto" style="margin-right: 20px; color: red">
+        <button style="color: red">uitloggen</button>
+    </div>
+</div>
+<nav style="background-color: white ;margin-left: 20px;margin-right: 20px; padding: 0px 20px 0px 0px;"
+     class="navbar navbar-expand-lg navbar-light border-top border-danger">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        {#{% include 'navbar.html.twig' %}#}
+        {% block nav %}{% endblock %}
+    </div>
+</nav>
+
+<main class="container-expand-sm border border-secondary" style="margin: 0px 20px 0px 20px;">
+    <div class="card-group" style="margin-left: 20px;">
+        <div class="card">
+            <img src="{{ asset('img/40402591_1797621563608171_7373067337957638144_o.jpg') }}" class="card-img-top"
+                 style="width: 600px;">
+        </div>
+
+        <div class="card">
+            <img src="{{ asset('img/40402591_1797621563608171_7373067337957638144_o.jpg') }}" class="card-img-top"
+                 style="width: 600px;">
+
+        </div>
+        <div class="card">
+            <img src="{{ asset('img/40402591_1797621563608171_7373067337957638144_o.jpg') }}" class="card-img-top"
+                 style="width: 600px;">
+
+        </div>
+    </div>
+    {#    <div class="row">#}
+    {#        <div style="margin-left: 50px; margin-right: 20px;"><div>#}
+    {#            <img src="{{ asset('img/40402591_1797621563608171_7373067337957638144_o.jpg') }}" class="img-fluid"#}
+    {#                 style="width: 600px; height: 300px;"#}
+    {#                 alt="Responsive image"></div>#}
+    {#           <div> <img src="{{ asset('img/IMG_8911-800x-e1516799327592.jpg') }}" class="img-fluid"#}
+    {#                 style="width: 600px; height: 300px;"#}
+    {#                 alt="Responsive image"></div>#}
+    {#            <div> <img src="{{ asset('img/mma-money-pic.jpg') }}" class="img-fluid" style="width: 600px; height: 300px;"#}
+    {#                 alt="Responsive image"></div>#}
+    {#        </div>#}
+    {#    </div>#}
+    <div class="row">
+        {% block body %}{% endblock %}
+    </div>
+</main>
+
+<!-- Footer -->
+<footer class="page-footer font-small .bg-secondary" style="background-color: grey; margin-top: 50px;">
+    <div class="footer-copyright text-center py-5" style="background-color: grey;">© 2018 Copyright:
+        <a href="https://mdbootstrap.com/education/bootstrap/"> MDBootstrap.com</a>
+    </div>
+    <!-- Copyright -->
+
+</footer>
+
+{% block javascripts %}
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+            integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.0/js/bootstrap.min.js"
+            integrity="sha384-3qaqj0lc6sV/qpzrc1N5DC6i1VRn/HyX4qdPaiEFbn54VjQBEU341pvjz7Dv3n6P"
+            crossorigin="anonymous"></script>
+{% endblock %}
+</body>
+</html>
