@@ -15,12 +15,25 @@
 
 <body>
 <div class="d-flex">
-    <div class="p-2"><img src="{{ asset('img/logo.jpg') }}" class="img-fluid" style="width: 200px; height: auto;"
-                          alt="Responsive image"></div>
-    <div class="p-2"><h1 style="color: red; text-align: left">Training Centrum <br> Den Haag</h1></div>
-    <div class="p-2 ml-auto" style="margin-right: 20px; color: red">
-        <button style="color: red">uitloggen</button>
+    <div class="p-2 d-none d-sm-none d-md-block">
+        <img class="rounded" style="width: 200px;" src="{{ asset('img/logo.jpg') }}">
     </div>
+    <div class="p-2">
+        <h1 style="color: red; font: 3rem 'Bauhaus 93'" class="d-none d-sm-block">Training Centrum <br> Den Haag
+        </h1>
+        <h1 style="color: red; font: 2rem 'Bauhaus 93'" class="d-block d-sm-none">Training Centrum <br> Den Haag
+        </h1>
+    </div>
+    {% if app.user %}
+        <form class="p-2 ml-auto text-danger" style="text-align: right">
+            <h4>Je bent ingelogt als: <br><br> - {{ app.user.username }} - <br><br></h4> <a type="button" class="btn btn-outline-danger" href="{{ path('app_logout') }}">Uitloggen</a>
+        </form>
+    {% else %}
+        <form class="p-2 ml-auto text-danger" style="text-align: right">
+            <h4>U kunt hier klikken <br><br> om te inloggen</h4><br>
+            <a type="button" href="/login" class="btn btn-outline-danger">Inloggen</a>
+        </form>
+    {% endif %}
 </div>
 <nav style="background-color: white ;margin-left: 20px;margin-right: 20px; padding: 0px 20px 0px 0px;"
      class="navbar navbar-expand-lg navbar-light border-top border-danger">

@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Lessen index{% endblock %}
+
+{% block body %}
+    <h1>Lessen index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Tijd</th>
+                <th>Datum</th>
+                <th>Locatie</th>
+                <th>Max_personen</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for lessen in lessens %}
+            <tr>
+                <td>{{ lessen.id }}</td>
+                <td>{{ lessen.tijd ? lessen.tijd|date('H:i:s') : '' }}</td>
+                <td>{{ lessen.datum ? lessen.datum|date('Y-m-d') : '' }}</td>
+                <td>{{ lessen.locatie }}</td>
+                <td>{{ lessen.maxPersonen }}</td>
+                <td>
+                    <a href="{{ path('lessen_show', {'id': lessen.id}) }}">show</a>
+                    <a href="{{ path('lessen_edit', {'id': lessen.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('lessen_new') }}">Create new</a>
+{% endblock %}

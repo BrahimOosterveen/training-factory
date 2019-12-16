@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Lessen{% endblock %}
+
+{% block body %}
+    <h1>Lessen</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ lessen.id }}</td>
+            </tr>
+            <tr>
+                <th>Tijd</th>
+                <td>{{ lessen.tijd ? lessen.tijd|date('H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Datum</th>
+                <td>{{ lessen.datum ? lessen.datum|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Locatie</th>
+                <td>{{ lessen.locatie }}</td>
+            </tr>
+            <tr>
+                <th>Max_personen</th>
+                <td>{{ lessen.maxPersonen }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('lessen_index') }}">back to list</a>
+
+    <a href="{{ path('lessen_edit', {'id': lessen.id}) }}">edit</a>
+
+    {{ include('lessen/_delete_form.html.twig') }}
+{% endblock %}

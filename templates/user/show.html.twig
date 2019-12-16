@@ -1,0 +1,93 @@
+{% extends 'base.html.twig' %}
+{% block nav %}
+    <ul class="navbar-nav" style="text-decoration: underline red">
+        <li class="nav-item ">
+            <a class="nav-link text-danger"  href="home.html.twig">Home <span class="sr-only ">(current)</span></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-danger" href="inschrijven.html.twig">Instructeur</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-danger" href="/user"><b>Leden</b></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-danger" href="#" tabindex="-1" aria-disabled="true">Trainingen</a>
+        </li>
+    </ul>
+{% endblock %}
+{% block title %}User{% endblock %}
+
+{% block body %}
+    <h1>User</h1>
+
+    <table class="table">
+        <tbody>
+{#            <tr>#}
+{#                <th>Id</th>#}
+{#                <td>{{ user.id }}</td>#}
+{#            </tr>#}
+            <tr>
+                <th>Email</th>
+                <td>{{ user.email }}</td>
+            </tr>
+{#            <tr>#}
+{#                <th>Roles</th>#}
+{#                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>#}
+{#            </tr>#}
+{#            <tr>#}
+{#                <th>Password</th>#}
+{#                <td>{{ user.password }}</td>#}
+{#            </tr>#}
+            <tr>
+                <th>Loginnaam</th>
+                <td>{{ user.loginnaam }}</td>
+            </tr>
+            <tr>
+                <th>Naam</th>
+                <td>{{ user.naam }}</td>
+            </tr>
+            <tr>
+                <th>Tussenvoegsel</th>
+                <td>{{ user.tussenvoegsel }}</td>
+            </tr>
+            <tr>
+                <th>Achternaam</th>
+                <td>{{ user.achternaam }}</td>
+            </tr>
+            <tr>
+                <th>Geboortedatum</th>
+                <td>{{ user.geboortedatum ? user.geboortedatum|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Gender</th>
+                <td>{{ user.gender }}</td>
+            </tr>
+            <tr>
+                <th>Aanneemdatum</th>
+                <td>{{ user.aanneemdatum ? user.aanneemdatum|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Salaris</th>
+                <td>{{ user.salaris }}</td>
+            </tr>
+            <tr>
+                <th>Straat</th>
+                <td>{{ user.straat }}</td>
+            </tr>
+            <tr>
+                <th>Postcode</th>
+                <td>{{ user.postcode }}</td>
+            </tr>
+            <tr>
+                <th>Plaats</th>
+                <td>{{ user.plaats }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('user_index') }}">back to list</a>
+
+    <a href="{{ path('user_edit', {'id': user.id}) }}">edit</a>
+
+    {{ include('user/_delete_form.html.twig') }}
+{% endblock %}
