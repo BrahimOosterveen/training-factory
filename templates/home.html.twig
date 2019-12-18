@@ -1,21 +1,99 @@
 {% extends 'base.html.twig' %}
 
 {% block nav %}
-    <ul class="navbar-nav" style="text-decoration: underline red">
-        <li class="nav-item ">
-            <a class="nav-link text-danger"  href="/home"><b>Home</b> <span class="sr-only ">(current)</span></a>
+{#    <ul class="navbar-nav" style="text-decoration: underline red">#}
+{#        <li class="nav-item ">#}
+{#            <a class="nav-link text-danger"  href="/home"><b>Home</b> <span class="sr-only ">(current)</span></a>#}
+{#        </li>#}
+{#        <li class="nav-item">#}
+{#            <a class="nav-link text-danger" href="/inschrijven">Inschrijven op les</a>#}
+{#        </li>#}
+{#        <li class="nav-item">#}
+{#            <a class="nav-link text-danger" href="/lessen">Overzicht inschrijvingen</a>#}
+{#        </li>#}
+{#        <li class="nav-item">#}
+{#            <a class="nav-link text-danger" href="#" tabindex="-1" aria-disabled="true">Gegevens lid wijzigen</a>#}
+{#        </li>#}
+{#    </ul>#}
+
+    {% if is_granted('ROLE_ADMIN') %}
+<ul class="navbar-nav" style="text-decoration: underline red">
+        <li class="nav-item">
+            <a class="nav-link text-danger"
+               href="/admin/home" {% if app.request.get('_route') == 'adminhome' %} style="font-weight: bold" {% endif %}>
+                Home</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link text-danger" href="/inschrijven">Inschrijven op les</a>
+            <a class="nav-link text-danger"
+               href="#" {% if app.request.get('_route') == '' %} style="font-weight: bold" {% endif %}>
+                Instructeurs</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link text-danger" href="/lessen">Overzicht inschrijvingen</a>
+            <a class="nav-link text-danger"
+               href="#" {% if app.request.get('_route') == '' %} style="font-weight: bold" {% endif %}>
+                Leden</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link text-danger" href="#" tabindex="-1" aria-disabled="true">Gegevens lid wijzigen</a>
+            <a class="nav-link text-danger"
+               href="/training" {% if app.request.get('_route') == 'training_index' %} style="font-weight: bold" {% endif %}>
+                Trainingen</a>
         </li>
-    </ul>
+</ul>
+    {% elseif is_granted('ROLE_USER') %}
+        <ul class="navbar-nav" style="text-decoration: underline red">
+        <li class="nav-item">
+            <a class="nav-link text-danger"
+               href="/" {% if app.request.get('_route') == 'home' %} style="font-weight: bold" {% endif %}>
+                Home</a>
+        </li>
+        <li class="nav-item text-danger">
+            <a class="nav-link text-danger"
+               href="#" {% if app.request.get('_route') == '' %} style="font-weight: bold" {% endif %}>
+                Inschrijven op les</a>
+        </li>
+        <li class="nav-item text-danger">
+            <a class="nav-link text-danger"
+               href="/#" {% if app.request.get('_route') == '' %} style="font-weight: bold" {% endif %}>
+                Overzicht inschrijven</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-danger"
+               href="#" {% if app.request.get('_route') == '' %} style="font-weight: bold" {% endif %}>
+                Gegevens lid wijzigen</a>
+        </li>
+        </ul>
+    {% else %}
+        <ul class="navbar-nav" style="text-decoration: underline red">
+        <li class="nav-item">
+            <a class="nav-link text-danger"
+               href="/" {% if app.request.get('_route') == 'home' %} style="font-weight: bold" {% endif %}>
+                Home</a>
+        </li>
+        <li class="nav-item text-danger">
+            <a class="nav-link text-danger"
+               href="/trainingsAanbod" {% if app.request.get('_route') == 'trainingsAanbod' %} style="font-weight: bold" {% endif %}>
+                Trainings Aanbod</a>
+        </li>
+        <li class="nav-item text-danger">
+            <a class="nav-link text-danger"
+               href="/lid_worden" {% if app.request.get('_route') == '' %} style="font-weight: bold" {% endif %}>
+                Lid Worden</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-danger"
+               href="#" {% if app.request.get('_route') == '' %} style="font-weight: bold" {% endif %}>
+                Gedrachtsregels</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-danger"
+               href="#" {% if app.request.get('_route') == '' %} style="font-weight: bold" {% endif %}>
+                Lokatie & contact</a>
+        </li>
+        </ul>
+    {% endif %}
 {% endblock %}
+
+
 
 
 {% block body %}

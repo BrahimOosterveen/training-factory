@@ -5,13 +5,21 @@
       <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/templates/nav.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/packages/security.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/security.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config/packages/twig.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/twig.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/css/inschrijven.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/inschrijven.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/css/login.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/login.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/40402591_1797621563608171_7373067337957638144_o.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/public/kickboksen.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/IMG_8911-800x-e1516799327592.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/public/boksen.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/logo.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/public/logo.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/mma-money-pic.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/public/mma-money-pic.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/LedenController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/LedenController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/LoginFormAuthenticatorController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/LoginFormAuthenticatorController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/home.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/home.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Entity/Lessen.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Lessen.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Entity/Persoon.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Training.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Training.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/User.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/admin/admin.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/admin.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/article/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/article/show.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
@@ -171,11 +179,11 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\training-factory\public" />
       <recent name="C:\xampp\htdocs\training_factory\templates" />
       <recent name="C:\xampp\htdocs\training_factory\templates\leden" />
       <recent name="C:\xampp\htdocs\training_factory\templates\instructeur" />
       <recent name="C:\xampp\htdocs\training_factory\templates\admin" />
-      <recent name="C:\xampp\htdocs\training_factory\public" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -205,7 +213,7 @@
       <workItem from="1575283535180" duration="446000" />
       <workItem from="1575445047803" duration="71556000" />
       <workItem from="1576483643072" duration="3531000" />
-      <workItem from="1576487778527" duration="17919000" />
+      <workItem from="1576487778527" duration="32146000" />
     </task>
     <servers />
   </component>

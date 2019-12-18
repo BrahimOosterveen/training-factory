@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Gegenereerd op: 18 dec 2019 om 09:35
+-- Gegenereerd op: 18 dec 2019 om 14:37
 -- Serverversie: 10.4.8-MariaDB
 -- PHP-versie: 7.1.33
 
@@ -74,7 +74,11 @@ INSERT INTO `migration_versions` (`version`, `executed_at`) VALUES
 ('20191210104239', '2019-12-10 10:43:04'),
 ('20191213085727', '2019-12-13 08:58:18'),
 ('20191216124557', '2019-12-16 12:48:08'),
-('20191216124733', '2019-12-16 12:48:09');
+('20191216124733', '2019-12-16 12:48:09'),
+('20191218083808', '2019-12-18 08:38:54'),
+('20191218083830', '2019-12-18 08:38:54'),
+('20191218110833', '2019-12-18 11:10:04'),
+('20191218110858', '2019-12-18 11:10:04');
 
 -- --------------------------------------------------------
 
@@ -98,16 +102,20 @@ CREATE TABLE `training` (
   `naam` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `beschrijving` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `tijd` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `kosten` decimal(10,2) DEFAULT NULL
+  `kosten` decimal(10,2) DEFAULT NULL,
+  `image` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Gegevens worden geëxporteerd voor tabel `training`
 --
 
-INSERT INTO `training` (`id`, `naam`, `beschrijving`, `tijd`, `kosten`) VALUES
-(1, 'MMA', 'hierbij gaan we MMA oefenen', '21:00:00', '20.00'),
-(2, 'stootzak training', 'hierbij gaan we oefenen', '21:00:00', '20.00');
+INSERT INTO `training` (`id`, `naam`, `beschrijving`, `tijd`, `kosten`, `image`) VALUES
+(1, 'MMA', 'hierbij gaan we MMA oefenen', '21:00:00', '20.00', 'boksen'),
+(2, 'stootzak training', 'hierbij gaan we oefenen', '21:00:00', '20.00', 'kickboksen'),
+(6, 'zwaargewicht', 'idk', '3:00:0', '10.20', 'boksen'),
+(7, 'Boksen', 'boksen in de ring', '13:00', '5.50', 'boksen'),
+(8, 'kickboksen', 'vechten', '13:00', '10.20', 'kickboksen');
 
 -- --------------------------------------------------------
 
@@ -120,14 +128,14 @@ CREATE TABLE `user` (
   `email` varchar(180) COLLATE utf8mb4_unicode_ci NOT NULL,
   `roles` longtext COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '(DC2Type:json)',
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `loginnaam` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `loginnaam` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `naam` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `tussenvoegsel` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tussenvoegsel` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `achternaam` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `geboortedatum` date NOT NULL,
   `gender` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `aanneemdatum` date NOT NULL,
-  `salaris` decimal(10,2) NOT NULL,
+  `aanneemdatum` date DEFAULT NULL,
+  `salaris` decimal(10,2) DEFAULT NULL,
   `straat` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `postcode` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `plaats` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
@@ -138,8 +146,8 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `email`, `roles`, `password`, `loginnaam`, `naam`, `tussenvoegsel`, `achternaam`, `geboortedatum`, `gender`, `aanneemdatum`, `salaris`, `straat`, `postcode`, `plaats`) VALUES
-(1, 'brahim701222@gmail.com', '[\"ROLE_USER\"]', '$2y$13$DKm7VHVAb1t943RyIceZ3OUWptnozB1wlvocTZSywZsN6tEBw7g1e', 'Brahim Oosterveen', 'Brahim', '', 'Oosterveen', '2001-12-22', 'm', '2019-12-10', '2300.00', 'hemstraat 8', '1234FG', 'Schipluiden'),
-(2, 'appelgebak@gmail.com', '[\"ROLE_ADMIN\"]', '$2y$13$Y.ZSGQRh0WPgkyLNrLNdQ.6pCirPAfXJwJ9flsy30NNyAWdN2qWn6\r\n', 'admin', 'admin', '', 'admin', '2022-12-01', 'm', '0000-00-00', '0.00', 'winkelstraat', '2493BV', 'denhaag');
+(1, 'brahim701222@gmail.com', '[\"ROLE_ADMIN\"]', '$2y$13$DKm7VHVAb1t943RyIceZ3OUWptnozB1wlvocTZSywZsN6tEBw7g1e', 'Brahim Oosterveen', 'Brahim', '', 'Oosterveen', '2001-12-22', 'm', '2019-12-10', '2300.00', 'hemstraat 8', '1234FG', 'Schipluiden'),
+(11, '12@gmail.com', '[]', '$2y$13$lXjV1or9DtEc3CWbw7TFteLWCN8xYhKvLvFfnRspKYA/uzpjvy32i', NULL, 'Marek', NULL, 'Beers', '2014-01-01', 'vrouw', NULL, NULL, 'dildoberglaan', '2309KC', 'Rijswijk');
 
 --
 -- Indexen voor geëxporteerde tabellen
@@ -197,13 +205,13 @@ ALTER TABLE `registreren`
 -- AUTO_INCREMENT voor een tabel `training`
 --
 ALTER TABLE `training`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT voor een tabel `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- Beperkingen voor geëxporteerde tabellen

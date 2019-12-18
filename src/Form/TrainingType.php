@@ -6,6 +6,7 @@ use App\Entity\Training;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class TrainingType extends AbstractType
 {
@@ -16,7 +17,12 @@ class TrainingType extends AbstractType
             ->add('beschrijving')
             ->add('tijd')
             ->add('kosten')
-//            ->add('image')
+            ->add('image', ChoiceType::class, [
+                'choices'  => [
+                    'kickboksen' => 'kickboksen',
+                    'boksen' => 'boksen',
+                ],
+            ]);
         ;
     }
 
