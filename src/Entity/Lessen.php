@@ -42,6 +42,11 @@ class Lessen
      */
     private $training;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $lokaal;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -103,6 +108,18 @@ class Lessen
     public function setTraining(?Training $training): self
     {
         $this->training = $training;
+
+        return $this;
+    }
+
+    public function getLokaal(): ?int
+    {
+        return $this->lokaal;
+    }
+
+    public function setLokaal(int $lokaal): self
+    {
+        $this->lokaal = $lokaal;
 
         return $this;
     }

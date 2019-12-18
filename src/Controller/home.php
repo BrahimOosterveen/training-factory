@@ -3,6 +3,7 @@
 
 namespace App\Controller;
 
+use App\Repository\TrainingRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -31,6 +32,18 @@ class home extends AbstractController
             'title' => ucwords(str_replace('-', ' ', '-')),
         ]);
     }
+
+    /**
+     * @Route("/inschrijven", name="inschrijven")
+     */
+
+    public function inschrijvenOverzicht(TrainingRepository $trainingRepository): Response
+    {
+        return $this->render('inschrijven.html.twig', [
+            'trainings' => $trainingRepository->findAll(),
+        ]);
+    }
+
 
 
 

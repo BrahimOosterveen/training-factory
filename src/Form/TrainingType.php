@@ -16,6 +16,7 @@ class TrainingType extends AbstractType
             ->add('beschrijving')
             ->add('tijd')
             ->add('kosten')
+//            ->add('image')
         ;
     }
 

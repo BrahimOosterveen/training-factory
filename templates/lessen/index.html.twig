@@ -1,5 +1,20 @@
 {% extends 'base.html.twig' %}
-
+{% block nav %}
+    <ul class="navbar-nav" style="text-decoration: underline red">
+        <li class="nav-item ">
+            <a class="nav-link text-danger"  href="/home">Home <span class="sr-only ">(current)</span></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-danger" href="inschrijven.html.twig">Inschrijven op les</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-danger" href="/lessen"><b>Overzicht inschrijvingen</b></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-danger" href="#" tabindex="-1" aria-disabled="true">Gegevens lid wijzigen</a>
+        </li>
+    </ul>
+{% endblock %}
 {% block title %}Lessen index{% endblock %}
 
 {% block body %}
@@ -7,26 +22,31 @@
 
     <table class="table">
         <thead>
-            <tr>
-                <th>Id</th>
-                <th>Tijd</th>
-                <th>Datum</th>
-                <th>Locatie</th>
-                <th>Max_personen</th>
-                <th>actions</th>
-            </tr>
+        <tr>
+            <th>Datum</th>
+            <th>Tijd</th>
+            <th>Sport</th>
+{#            <th>lokaal</th>#}
+            <th>Max_personen</th>
+            <th>Aantal ingeschreven deelnemers</th>
+            <th>Prijs</th>
+            <th>Uitschrijven</th>
+        </tr>
         </thead>
         <tbody>
         {% for lessen in lessens %}
             <tr>
-                <td>{{ lessen.id }}</td>
-                <td>{{ lessen.tijd ? lessen.tijd|date('H:i:s') : '' }}</td>
                 <td>{{ lessen.datum ? lessen.datum|date('Y-m-d') : '' }}</td>
+                <td>{{ lessen.tijd ? lessen.tijd|date('H:i:s') : '' }}</td>
+                <td>MMA</td>
+{#                <td>{{ lessen.lokaal }}</td>#}
                 <td>{{ lessen.locatie }}</td>
                 <td>{{ lessen.maxPersonen }}</td>
+                <td>10</td>
                 <td>
-                    <a href="{{ path('lessen_show', {'id': lessen.id}) }}">show</a>
-                    <a href="{{ path('lessen_edit', {'id': lessen.id}) }}">edit</a>
+{#                    <a href="{{ path('lessen_show', {'id': lessen.id}) }}">show</a>#}
+{#                    <a href="{{ path('lessen_edit', {'id': lessen.id}) }}">edit</a>#}
+                    {{ include('lessen/_delete_form.html.twig') }}
                 </td>
             </tr>
         {% else %}
