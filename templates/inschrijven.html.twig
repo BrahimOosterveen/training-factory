@@ -28,12 +28,14 @@
     <div class="card mb-4" style="max-width: 540px; margin-left: 50px;">
         <div class="row no-gutters">
             <div class="col-md-4">
-                <a href=""> <img src="{{ training.image }}.jpg" class="card-img" alt="..."></a>
+                 <img src="{{ training.image }}.jpg" class="card-img" alt="...">
             </div>
             <div class="col-md-8">
                 <div class="card-body">
                     <h2 class="card-title">            <td>{{ training.naam }}</td></h2>
+
                     <p class="card-text">{{ training.tijd ? training.tijd|date('H:i') : ''  }}</p>
+                    <a href="">inschrijven</a>
 
                 </div>
             </div>

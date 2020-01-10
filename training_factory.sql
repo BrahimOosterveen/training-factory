@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Gegenereerd op: 10 jan 2020 om 12:13
+-- Gegenereerd op: 10 jan 2020 om 13:03
 -- Serverversie: 10.4.8-MariaDB
 -- PHP-versie: 7.1.33
 
@@ -34,7 +34,7 @@ CREATE TABLE `lessen` (
   `id` int(11) NOT NULL,
   `tijd` time NOT NULL,
   `datum` date NOT NULL,
-  `locatie` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `locatie` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `max_personen` int(11) NOT NULL,
   `training_id` int(11) NOT NULL,
   `lokaal` int(11) NOT NULL
@@ -48,10 +48,10 @@ INSERT INTO `lessen` (`id`, `tijd`, `datum`, `locatie`, `max_personen`, `trainin
 (1, '06:00:00', '2019-12-16', 'delft', 12, 2, 0),
 (2, '06:00:00', '2019-12-14', 'delft', 11, 2, 0),
 (3, '06:00:00', '2019-12-15', 'den haag', 4, 1, 0),
-(4, '06:05:00', '2015-01-01', NULL, 1, 1, 999),
-(5, '08:00:00', '2015-01-01', NULL, 22, 7, 12),
-(6, '00:00:00', '2015-01-01', NULL, 120200202, 1, 2),
-(7, '11:00:00', '2020-01-01', NULL, 14, 1, 4);
+(4, '06:05:00', '2015-01-01', '', 1, 1, 999),
+(5, '08:00:00', '2015-01-01', '', 22, 7, 12),
+(6, '00:00:00', '2015-01-01', '', 120200202, 1, 2),
+(7, '11:00:00', '2020-01-01', '', 14, 1, 4);
 
 -- --------------------------------------------------------
 
@@ -82,7 +82,8 @@ INSERT INTO `migration_versions` (`version`, `executed_at`) VALUES
 ('20191218083808', '2019-12-18 08:38:54'),
 ('20191218083830', '2019-12-18 08:38:54'),
 ('20191218110833', '2019-12-18 11:10:04'),
-('20191218110858', '2019-12-18 11:10:04');
+('20191218110858', '2019-12-18 11:10:04'),
+('20200110111019', '2020-01-10 11:38:36');
 
 -- --------------------------------------------------------
 
@@ -92,7 +93,9 @@ INSERT INTO `migration_versions` (`version`, `executed_at`) VALUES
 
 CREATE TABLE `registreren` (
   `id` int(11) NOT NULL,
-  `betaling` decimal(10,2) NOT NULL
+  `betaling` decimal(10,2) NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `lessen_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -176,7 +179,9 @@ ALTER TABLE `migration_versions`
 -- Indexen voor tabel `registreren`
 --
 ALTER TABLE `registreren`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FK_2A8D9C6BA4625618` (`lessen_id`),
+  ADD KEY `IDX_2A8D9C6B9D86650F` (`user_id`);
 
 --
 -- Indexen voor tabel `training`
@@ -228,6 +233,13 @@ ALTER TABLE `user`
 --
 ALTER TABLE `lessen`
   ADD CONSTRAINT `FK_29B9C79BEFD98D1` FOREIGN KEY (`training_id`) REFERENCES `training` (`id`);
+
+--
+-- Beperkingen voor tabel `registreren`
+--
+ALTER TABLE `registreren`
+  ADD CONSTRAINT `FK_2A8D9C6B9D86650F` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
+  ADD CONSTRAINT `FK_2A8D9C6BA4625618` FOREIGN KEY (`lessen_id`) REFERENCES `lessen` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

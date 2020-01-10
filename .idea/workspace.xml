@@ -38,7 +38,7 @@
       <change beforePath="$PROJECT_DIR$/templates/lokatieencontact.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/lokatieencontact.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/registreren.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/registreren.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/registrerenbase.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/registrerenbase.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/training_factory.sql" beforeDir="false" afterPath="$PROJECT_DIR$/training_factory.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/training_factory.sql" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -216,7 +216,7 @@
       <workItem from="1575445047803" duration="71556000" />
       <workItem from="1576483643072" duration="3531000" />
       <workItem from="1576487778527" duration="48911000" />
-      <workItem from="1578487297786" duration="19698000" />
+      <workItem from="1578487297786" duration="22367000" />
     </task>
     <servers />
   </component>
