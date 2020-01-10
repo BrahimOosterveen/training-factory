@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -46,6 +48,16 @@ class Lessen
      * @ORM\Column(type="integer")
      */
     private $lokaal;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Registreren", mappedBy="lessen_id")
+     */
+    private $registrerens;
+
+    public function __construct()
+    {
+        $this->registrerens = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -123,4 +135,39 @@ class Lessen
 
         return $this;
     }
+
+    /**
+     * @return Collection|Registreren[]
+     */
+    public function getRegistrerens(): Collection
+    {
+        return $this->registrerens;
+    }
+
+    public function addRegistreren(Registreren $registreren): self
+    {
+        if (!$this->registrerens->contains($registreren)) {
+            $this->registrerens[] = $registreren;
+            $registreren->setLessenId($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRegistreren(Registreren $registreren): self
+    {
+        if ($this->registrerens->contains($registreren)) {
+            $this->registrerens->removeElement($registreren);
+            // set the owning side to null (unless already changed)
+            if ($registreren->getLessenId() === $this) {
+                $registreren->setLessenId(null);
+            }
+        }
+
+        return $this;
+    }
+
+
+
+
 }

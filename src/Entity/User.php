@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -95,6 +97,16 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=255)
      */
     private $plaats;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Registreren", mappedBy="user_id")
+     */
+    private $registrerens;
+
+    public function __construct()
+    {
+        $this->registrerens = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -295,6 +307,37 @@ class User implements UserInterface
     public function setPlaats(string $plaats): self
     {
         $this->plaats = $plaats;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Registreren[]
+     */
+    public function getRegistrerens(): Collection
+    {
+        return $this->registrerens;
+    }
+
+    public function addRegistreren(Registreren $registreren): self
+    {
+        if (!$this->registrerens->contains($registreren)) {
+            $this->registrerens[] = $registreren;
+            $registreren->setUserId($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRegistreren(Registreren $registreren): self
+    {
+        if ($this->registrerens->contains($registreren)) {
+            $this->registrerens->removeElement($registreren);
+            // set the owning side to null (unless already changed)
+            if ($registreren->getUserId() === $this) {
+                $registreren->setUserId(null);
+            }
+        }
 
         return $this;
     }

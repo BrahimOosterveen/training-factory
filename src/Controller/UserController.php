@@ -38,6 +38,8 @@ class UserController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
             $encoded = $encoder->encodePassword($user, $user->getPassword());
+            /** @var UploadedFile $image */
+//            $image = $form['image']->getData();
 
             $user->setPassword($encoded);
             $entityManager->persist($user);

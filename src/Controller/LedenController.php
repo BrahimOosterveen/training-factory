@@ -12,37 +12,28 @@ use Symfony\Component\Routing\Annotation\Route;
 class LedenController extends AbstractController
 {
     /**
-     * @Route("/inschrijven/{datum}")
+     * @Route("/inschrijven/datum/{date}" , name="app_inschrijven")
      */
 
-    public function inschrijven($datum)
+    public function datumLesson($date)
     {
 
-        if($datum=="vandaag")
-        {
-            $date=new \DateTime("now");
-        }
-        else
-        {
-            $date=new \DateTime("now +1 day");
-        }
 
-
-        $lessons=$this->getDoctrine()->getRepository(Lessen::class)->findBy(['datum'=>$date]);
-        dd($lessons);
         return $this->render('inschrijven.html.twig', [
-            'title' => ucwords(str_replace('-', ' ', '-')),
+            'page_name' => 'app_inschrijven'
         ]);
     }
 
-//    /**
-//     * @Route("/news/{slug}")
-//     */
-//    public function show($slug)
-//    {
-//        return new Response(sprintf(
-//            'Future page to show the article: "%s"',
-//            $slug
-//        ));
-//    }
+    /**
+     * @Route("/inschrijven/datum/{date}" , name="app_latere_inschrijvingen")
+     */
+
+    public function latereLesson($date)
+    {
+        return $this->render('inschrijven.html.twig', [
+            'page_name' => 'app_latere_inschrijvingen'
+        ]);
+    }
+
+
 }

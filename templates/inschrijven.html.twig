@@ -1,161 +1,49 @@
 {% extends 'base.html.twig' %}
 
-{% block nav %}
-    <ul class="navbar-nav" style="text-decoration: underline red">
-        <li class="nav-item ">
-            <a class="nav-link text-danger"  href="home.html.twig">Home <span class="sr-only ">(current)</span></a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link text-danger" href="inschrijven.html.twig"><b>Inschrijven op les</b></a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link text-danger" href="inschrijvingen.html.twig">Overzicht inschrijvingen</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link text-danger" href="#" tabindex="-1" aria-disabled="true">Gegevens lid wijzigen</a>
-        </li>
-    </ul>
-{% endblock %}
+
 
 {% block body %}
 <link rel="stylesheet" href="{{ asset('css/inschrijven.css') }}" />
 <h3 style="margin: 50px 0px 0px 50px;">Inschrijven op les</h3>
-    <ul class="schedule__tabs only-regular" style="background-color: lightgrey; padding: 10px ; margin-left: 50px;" role="tablist">
-        <li class="schedule__item">
-            <a class="is-active js-schedule-date"
-{#               onclick="ScheduleIndex.UpdateScheduleDesktop('04-12-2019')"#}
-{#               href="javascript:;"#}
-{#               id="date_04-12-2019"#}
-               title="woensdag 4 december 2019">Vandaag</a>
-        </li>
-        <li class="schedule__item">
-            <a class=" js-schedule-date"
-{#               onclick="ScheduleIndex.UpdateScheduleDesktop('05-12-2019')"#}
-{#               href="javascript:;"#}
-{#               id="date_05-12-2019"#}
-               title="donderdag 5 december 2019">Do 5 dec</a>
-        </li>
-        <li class="schedule__item">
-            <a class=" js-schedule-date"
-{#               onclick="ScheduleIndex.UpdateScheduleDesktop('06-12-2019')"#}
-{#               href="javascript:;"#}
-{#               id="date_06-12-2019"#}
-               title="vrijdag 6 december 2019">Vr 6 dec</a>
-        </li>
-        <li class="schedule__item">
-            <a class=" js-schedule-date"
-{#               onclick="ScheduleIndex.UpdateScheduleDesktop('07-12-2019')"#}
-{#               href="javascript:;"#}
-{#               id="date_07-12-2019"#}
-               title="zaterdag 7 december 2019">Za 7 dec</a>
-        </li>
-        <li class="schedule__item">
-            <a class=" js-schedule-date"
-{#               onclick="ScheduleIndex.UpdateScheduleDesktop('08-12-2019')"#}
-{#               href="javascript:;"#}
-{#               id="date_08-12-2019"#}
-               title="zondag 8 december 2019">Zo 8 dec</a>
-        </li>
-        <li class="schedule__item">
-            <a class=" js-schedule-date"
-{#               onclick="ScheduleIndex.UpdateScheduleDesktop('09-12-2019')"#}
-{#               href="javascript:;"#}
-{#               id="date_09-12-2019"#}
-               title="maandag 9 december 2019">Ma 9 dec</a>
-        </li>
-        <li class="schedule__item">
-            <a class=" js-schedule-date"
-{#               onclick="ScheduleIndex.UpdateScheduleDesktop('10-12-2019')"#}
-{#               href="javascript:;"#}
-{#               id="date_10-12-2019"#}
-               title="dinsdag 10 december 2019">Di 10 dec</a>
-        </li>
-        <li class="schedule__item">
-            <a class=" js-schedule-date"
-{#               onclick="ScheduleIndex.UpdateScheduleDesktop('11-12-2019')"#}
-{#               href="javascript:;"#}
-{#               id="date_11-12-2019"#}
-               title="woensdag 11 december 2019">Wo 11 dec</a>
-        </li>
-        <li class="schedule__item">
-            <a class=" js-schedule-date"
-{#               onclick="ScheduleIndex.UpdateScheduleDesktop('12-12-2019')"#}
-{#               href="javascript:;"#}
-{#               id="date_12-12-2019"#}
-               title="donderdag 12 december 2019">Do 12 dec</a>
-        </li>
-        <li class="schedule__item">
-            <a class=" js-schedule-date"
-{#               onclick="ScheduleIndex.UpdateScheduleDesktop('13-12-2019')"#}
-{#               href="javascript:;"#}
-{#               id="date_13-12-2019"#}
-               title="vrijdag 13 december 2019">Vr 13 dec</a>
-        </li>
-        <li class="schedule__item">
-            <a class=" js-schedule-date"
-{#               onclick="ScheduleIndex.UpdateScheduleDesktop('14-12-2019')"#}
-{#               href="javascript:;"#}
-{#               id="date_14-12-2019"#}
-               title="zaterdag 14 december 2019">Za 14 dec</a>
-        </li>
-        <li class="schedule__item">
-            <a class=" js-schedule-date"
-{#               onclick="ScheduleIndex.UpdateScheduleDesktop('15-12-2019')"#}
-{#               href="javascript:;"#}
-{#               id="date_15-12-2019"#}
-               title="zondag 15 december 2019">Zo 15 dec</a>
-        </li>
-        <li class="schedule__item">
-            <a class=" js-schedule-date"
-{#               onclick="ScheduleIndex.UpdateScheduleDesktop('16-12-2019')"#}
-{#               href="javascript:;"#}
-{#               id="date_16-12-2019"#}
-               title="maandag 16 december 2019">Ma 16 dec</a>
-        </li>
-        <li class="schedule__item">
-            <a class=" js-schedule-date"
-{#               onclick="ScheduleIndex.UpdateScheduleDesktop('17-12-2019')"#}
-{#               href="javascript:;"#}
-{#               id="date_17-12-2019"#}
-               title="dinsdag 17 december 2019">Di 17 dec</a>
-        </li>
-        <li class="schedule__item">
-            <a class=" js-schedule-date"
-{#               onclick="ScheduleIndex.UpdateScheduleDesktop('18-12-2019')"#}
-{#               href="javascript:;"#}
-{#               id="date_18-12-2019"#}
-               title="woensdag 18 december 2019">Wo 18 dec</a>
-        </li>
 
+
+<ul class="schedule__tabs only-regular" style="background-color: lightgrey; padding: 10px ; margin-left: 50px;" role="tablist">
+    <li class="schedule__item">
+<a class="is-active js-schedule-date" style="text-decoration:none;" href="{{ path('app_inschrijven', {date:date("now")|date("d-m-Y")}) }}">VANDAAG</a></li>
+{% for i in 1..13 %}
+    <li class="schedule__item"> <a class="is-active js-schedule-date" style="margin-left: 10px; text-decoration:none; " href="{{ path('app_inschrijven', {date:date("now")|date_modify("+#{i} day")|date("d-m-Y")}) }}"> {{ date("now")|date_modify("+#{i} day")|date("D d M") }} </a></li>
+</li>
+{% endfor %}
     </ul>
 
 
 
-{#            <td><button type="button" class="btn btn-outline-success">Inschrijven</button></td>#}
 
 
 
 
     {% for training in trainings %}
 
-    <div class="table">
+<div class="table">
     <div class="card mb-4" style="max-width: 540px; margin-left: 50px;">
         <div class="row no-gutters">
             <div class="col-md-4">
-                <img src="{{ training.image }}.jpg" class="card-img" alt="...">
+                <a href=""> <img src="{{ training.image }}.jpg" class="card-img" alt="..."></a>
             </div>
             <div class="col-md-8">
                 <div class="card-body">
                     <h2 class="card-title">            <td>{{ training.naam }}</td></h2>
                     <p class="card-text">{{ training.tijd ? training.tijd|date('H:i') : ''  }}</p>
+
                 </div>
             </div>
+
         </div>
     </div>
-        {% else %}
-            <tr>
-                <td colspan="6">no records found</td>
-            </tr>
+    {% else %}
+        <tr>
+            <td colspan="6">no records found</td>
+        </tr>
     {% endfor %}
 
-{% endblock %}
+    {% endblock %}

@@ -23,7 +23,7 @@ class home extends AbstractController
     }
 
     /**
-     * @Route("/home", name="home")
+     * @Route("/", name="home")
      */
 
     public function homepage()
@@ -81,7 +81,7 @@ class home extends AbstractController
     }
 
     /**
-     * @Route("/detail.html.twig")
+     * @Route("/detail")
      */
 
     public function detail()
@@ -102,7 +102,7 @@ class home extends AbstractController
         ]);
     }
     /**
-     * @Route("/lokatieencontact.html.twig")
+     * @Route("/lokatie")
      */
 
     public function lokatieencontact()

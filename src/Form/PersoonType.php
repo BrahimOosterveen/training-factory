@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Persoon;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -13,7 +14,7 @@ class PersoonType extends AbstractType
     {
         $builder
             ->add('loginnaam')
-            ->add('wachtwoord')
+            ->add('wachtwoord', passwordType::class)
             ->add('naam')
             ->add('achternaam')
             ->add('tussenvoegsel')
