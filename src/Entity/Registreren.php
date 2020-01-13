@@ -27,7 +27,7 @@ class Registreren
     private $user_id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\lessen", inversedBy="registrerens")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Lessen", inversedBy="registrerens")
      */
     private $lessen_id;
 

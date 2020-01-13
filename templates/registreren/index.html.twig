@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Registreren index{% endblock %}
+
+{% block body %}
+    <h1>Registreren index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Betaling</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for registreren in registrerens %}
+            <tr>
+                <td>{{ registreren.id }}</td>
+                <td>{{ registreren.betaling }}</td>
+                <td>
+                    <a href="{{ path('registreren_show', {'id': registreren.id}) }}">show</a>
+                    <a href="{{ path('registreren_edit', {'id': registreren.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('registreren_new') }}">Create new</a>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Registreren{% endblock %}
+
+{% block body %}
+    <h1>Registreren</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ registreren.id }}</td>
+            </tr>
+            <tr>
+                <th>Betaling</th>
+                <td>{{ registreren.betaling }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('registreren_index') }}">back to list</a>
+
+    <a href="{{ path('registreren_edit', {'id': registreren.id}) }}">edit</a>
+
+    {{ include('registreren/_delete_form.html.twig') }}
+{% endblock %}
