@@ -50,7 +50,7 @@ class Lessen
     private $lokaal;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Registreren", mappedBy="lessen_id")
+     * @ORM\OneToMany(targetEntity="App\Entity\Registreren", mappedBy="lessen")
      */
     private $registrerens;
 

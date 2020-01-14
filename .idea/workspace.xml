@@ -83,7 +83,7 @@
       <change beforePath="$PROJECT_DIR$/templates/loginbase.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/loginbase.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/registrerenbase.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/registrerenbase.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/security/login.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/security/login.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/training_factory.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/training_factory.sql" beforeDir="false" afterPath="$PROJECT_DIR$/training_factory.sql" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -264,6 +264,9 @@
       <workItem from="1578487297786" duration="22367000" />
       <workItem from="1578905818998" duration="183000" />
       <workItem from="1578906028496" duration="1330000" />
+      <workItem from="1578912048053" duration="92000" />
+      <workItem from="1578912161252" duration="6579000" />
+      <workItem from="1578996900599" duration="8731000" />
     </task>
     <servers />
   </component>

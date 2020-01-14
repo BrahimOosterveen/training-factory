@@ -18,13 +18,13 @@
 {% block title %}Lessen{% endblock %}
 
 {% block body %}
-    <h1>Lessen</h1>
+    <h1>Les</h1>
 
     <table class="table">
         <tbody>
             <tr>
-                <th>Id</th>
-                <td>{{ lessen.id }}</td>
+                <th>Training</th>
+                <td>{{ lessen.training.naam }}</td>
             </tr>
             <tr>
                 <th>Tijd</th>
@@ -39,15 +39,19 @@
                 <td>{{ lessen.locatie }}</td>
             </tr>
             <tr>
+                <th>lokaal</th>
+                <td>{{ lessen.lokaal }}</td>
+            </tr>
+            <tr>
                 <th>Max_personen</th>
                 <td>{{ lessen.maxPersonen }}</td>
             </tr>
         </tbody>
     </table>
 
-    <a href="{{ path('lessen_index') }}">back to list</a>
+{#    <a href="{{ path('lessen_index') }}">back to list</a>#}
 
-    <a href="{{ path('lessen_edit', {'id': lessen.id}) }}">edit</a>
+    <a href="{{ path('app_nu_inschrijvingen', {'id': lessen.id}) }}">inschrijven</a>
 
-    {{ include('lessen/_delete_form.html.twig') }}
+{#    {{ include('lessen/_delete_form.html.twig') }}#}
 {% endblock %}

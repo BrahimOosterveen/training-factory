@@ -13,8 +13,8 @@ class RegistrerenType extends AbstractType
     {
         $builder
             ->add('betaling')
-            ->add('user_id')
-            ->add('lessen_id')
+//            ->add('user_id')
+//            ->add('lessen_id')
         ;
     }
 

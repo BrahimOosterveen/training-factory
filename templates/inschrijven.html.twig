@@ -3,17 +3,22 @@
 
 
 {% block body %}
-<link rel="stylesheet" href="{{ asset('css/inschrijven.css') }}" />
-<h3 style="margin: 50px 0px 0px 50px;">Inschrijven op les</h3>
+    <link rel="stylesheet" href="{{ asset('css/inschrijven.css') }}"/>
+    <h3 style="margin: 50px 0px 0px 50px;">Inschrijven op les</h3>
 
 
-<ul class="schedule__tabs only-regular" style="background-color: lightgrey; padding: 10px ; margin-left: 50px;" role="tablist">
-    <li class="schedule__item">
-<a class="is-active js-schedule-date" style="text-decoration:none;" href="{{ path('app_inschrijven', {date:date("now")|date("d-m-Y")}) }}">VANDAAG</a></li>
-{% for i in 1..13 %}
-    <li class="schedule__item"> <a class="is-active js-schedule-date" style="margin-left: 10px; text-decoration:none; " href="{{ path('app_inschrijven', {date:date("now")|date_modify("+#{i} day")|date("d-m-Y")}) }}"> {{ date("now")|date_modify("+#{i} day")|date("D d M") }} </a></li>
-</li>
-{% endfor %}
+    <ul class="schedule__tabs only-regular" style="background-color: lightgrey; padding: 10px ; margin-left: 50px;"
+        role="tablist">
+        <li class="schedule__item">
+            <a class="is-active js-schedule-date" style="text-decoration:none;"
+               href="{{ path('app_inschrijven', {date:date("now")|date("d-m-Y")}) }}">VANDAAG</a></li>
+        {% for i in 1..13 %}
+            <li class="schedule__item"><a class="is-active js-schedule-date"
+                                          style="margin-left: 10px; text-decoration:none; "
+                                          href="{{ path('app_inschrijven', {date:date("now")|date_modify("+#{i} day")|date("d-m-Y")}) }}"> {{ date("now")|date_modify("+#{i} day")|date("D d M") }} </a>
+            </li>
+            </li>
+        {% endfor %}
     </ul>
 
 
@@ -22,30 +27,36 @@
 
 
 
-    {% for training in trainings %}
 
-<div class="table">
-    <div class="card mb-4" style="max-width: 540px; margin-left: 50px;">
-        <div class="row no-gutters">
-            <div class="col-md-4">
-                 <img src="{{ training.image }}.jpg" class="card-img" alt="...">
-            </div>
-            <div class="col-md-8">
-                <div class="card-body">
-                    <h2 class="card-title">            <td>{{ training.naam }}</td></h2>
-
-                    <p class="card-text">{{ training.tijd ? training.tijd|date('H:i') : ''  }}</p>
-                    <a href="">inschrijven</a>
+    {% for lessen in lessens %}
+        <div class="table">
+            <div class="card mb-4" style="max-width: 540px; margin-left: 50px;">
+                <div class="row no-gutters">
+                    <div class="col-md-4">
+                        {% for training in trainings %}
+                            {% if training.naam == lessen.training.naam %}
+                                <img src="{{ training.image }}.jpg" class="card-img" alt="...">
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h2 class="card-title">
+                                <td>{{ lessen.training.naam }}</td>
+                            </h2>
+                            <p class="card-text">{{ lessen.tijd ? lessen.tijd|date('H:i') : '' }}</p>
+                            {#                    <a  class="btn btn-outline-success" href="{{ path('training_show', {'id': training.id}) }}">meer informatie</a>#}
+                            <a  class="btn btn-outline-success" href="{{ path('lessen_show', {'id': lessen.id}) }}">meer informatie</a>
+                        </div>
+                    </div>
 
                 </div>
             </div>
-
         </div>
-    </div>
     {% else %}
         <tr>
             <td colspan="6">no records found</td>
         </tr>
     {% endfor %}
 
-    {% endblock %}
+{% endblock %}

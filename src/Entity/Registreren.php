@@ -24,12 +24,12 @@ class Registreren
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="registrerens")
      */
-    private $user_id;
+    private $user;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Lessen", inversedBy="registrerens")
      */
-    private $lessen_id;
+    private $lessen;
 
     public function getId(): ?int
     {
@@ -48,26 +48,26 @@ class Registreren
         return $this;
     }
 
-    public function getUserId(): ?User
+    public function getUser(): ?User
     {
-        return $this->user_id;
+        return $this->user;
     }
 
-    public function setUserId(?User $user_id): self
+    public function setUser(?User $user): self
     {
-        $this->user_id = $user_id;
+        $this->user = $user;
 
         return $this;
     }
 
-    public function getLessenId(): ?lessen
+    public function getLessen(): ?lessen
     {
-        return $this->lessen_id;
+        return $this->lessen;
     }
 
-    public function setLessenId(?lessen $lessen_id): self
+    public function setLessen(?lessen $lessen): self
     {
-        $this->lessen_id = $lessen_id;
+        $this->lessen = $lessen;
 
         return $this;
     }

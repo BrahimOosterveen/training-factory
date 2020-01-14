@@ -18,6 +18,8 @@
             <tr>
                 <td>{{ registreren.id }}</td>
                 <td>{{ registreren.betaling }}</td>
+                <td>{{ registreren.user_id }}</td>
+                <td>{{ registreren.lesson_id }}</td>
                 <td>
                     <a href="{{ path('registreren_show', {'id': registreren.id}) }}">show</a>
                     <a href="{{ path('registreren_edit', {'id': registreren.id}) }}">edit</a>

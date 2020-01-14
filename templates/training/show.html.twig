@@ -8,8 +8,8 @@
     <table class="table">
         <tbody>
             <tr>
-                <th>Id</th>
-                <td>{{ training.id }}</td>
+{#                <th>Id</th>#}
+{#                <td>{{ training.id }}</td>#}
             </tr>
             <tr>
                 <th>Naam</th>
@@ -29,10 +29,10 @@
             </tr>
         </tbody>
     </table>
+    <a href="{{ path('registreren_new') }}">Create new</a>
+{#    <a href="{{ path('training_index') }}">back to list</a>#}
 
-    <a href="{{ path('training_index') }}">back to list</a>
-
-    <a href="{{ path('training_edit', {'id': training.id}) }}">edit</a>
+{#    <a href="{{ path('training_edit', {'id': training.id}) }}">edit</a>#}
 
 {#    {{ include('training/_delete_form.html.twig') }}#}
 {% endblock %}

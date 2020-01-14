@@ -99,7 +99,7 @@ class User implements UserInterface
     private $plaats;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Registreren", mappedBy="user_id")
+     * @ORM\OneToMany(targetEntity="App\Entity\Registreren", mappedBy="user")
      */
     private $registrerens;
 

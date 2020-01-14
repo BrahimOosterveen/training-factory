@@ -17,7 +17,7 @@ class LessenType extends AbstractType
         $builder
             ->add('tijd')
             ->add('datum')
-//            ->add('locatie')
+            ->add('locatie')
             ->add('lokaal', ChoiceType::class, [
                 'choices'  => [
                     '1' => '1',
