@@ -1,20 +1,5 @@
 {% extends 'base.html.twig' %}
-{#{% block nav %}#}
-{#    <ul class="navbar-nav" style="text-decoration: underline red">#}
-{#        <li class="nav-item ">#}
-{#            <a class="nav-link text-danger"  href="/home">Home <span class="sr-only ">(current)</span></a>#}
-{#        </li>#}
-{#        <li class="nav-item">#}
-{#            <a class="nav-link text-danger" href="inschrijven.html.twig">Instructeur</a>#}
-{#        </li>#}
-{#        <li class="nav-item">#}
-{#            <a class="nav-link text-danger" href="/user"><b>Leden</b></a>#}
-{#        </li>#}
-{#        <li class="nav-item">#}
-{#            <a class="nav-link text-danger" href="#" tabindex="-1" aria-disabled="true">Trainingen</a>#}
-{#        </li>#}
-{#    </ul>#}
-{#{% endblock %}#}
+
 {% block title %}User index{% endblock %}
 
 {% block body %}
@@ -22,57 +7,66 @@
 
     <table class="table">
         <thead>
-            <tr>
-{#                <th>Id</th>#}
-                <th>Email</th>
-{#                <th>Roles</th>#}
-{#                <th>Password</th>#}
-{#                <th>Loginnaam</th>#}
-                <th>Naam</th>
-{#                <th>Tussenvoegsel</th>#}
-{#                <th>Achternaam</th>#}
-{#                <th>Geboortedatum</th>#}
-{#                <th>Gender</th>#}
-{#                <th>Aanneemdatum</th>#}
-{#                <th>Salaris</th>#}
-                <th>Straat</th>
-{#                <th>Postcode</th>#}
-                <th>Plaats</th>
-                <th>Details</th>
-                <th>Verwijderen</th>
-            </tr>
+        <tr>
+            {#                <th>Id</th>#}
+            <th>Email</th>
+            {#                <th>Roles</th>#}
+            {#                <th>Password</th>#}
+            {#                <th>Loginnaam</th>#}
+            <th>Naam</th>
+            <th>Achternaam</th>
+                            <th>Tussenvoegsel</th>
+            {#                <th>Achternaam</th>#}
+            {#                <th>Geboortedatum</th>#}
+            {#                <th>Gender</th>#}
+            {#                <th>Aanneemdatum</th>#}
+            {#                <th>Salaris</th>#}
+{#            <th>Straat</th>#}
+{#            #}{#                <th>Postcode</th>#}
+{#            <th>Plaats</th>#}
+            <th>Details</th>
+            <th>Verwijderen</th>
+        </tr>
         </thead>
         <tbody>
         {% for user in users %}
-            <tr>
-{#                <td>{{ user.id }}</td>#}
-                <td>{{ user.email }}</td>
-{#                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>#}
-{#                <td>{{ user.password }}</td>#}
-{#                <td>{{ user.loginnaam }}</td>#}
-                <td>{{ user.naam }}</td>
-                <td>{{ user.tussenvoegsel }}</td>
-                <td>{{ user.achternaam }}</td>
-{#                <td>{{ user.geboortedatum ? user.geboortedatum|date('Y-m-d') : '' }}</td>#}
-{#                <td>{{ user.gender }}</td>#}
-{#                <td>{{ user.aanneemdatum ? user.aanneemdatum|date('Y-m-d') : '' }}</td>#}
-{#                <td>{{ user.salaris }}</td>#}
-                <td>{{ user.straat }}</td>
-{#                <td>{{ user.postcode }}</td>#}
-                <td>{{ user.plaats }}</td>
-                <td>
-                    <a href="{{ path('user_show', {'id': user.id}) }}">V</a>
-{#                    <a href="{{ path('user_edit', {'id': user.id}) }}">edit</a>#}
-                </td>
-                <td>    {{ include('user/_delete_form.html.twig') }}</td>
-            </tr>
+
+            {% if "ROLE_USER" in user.roles and app.request.get('_route') == 'user_index' %}
+
+                <tr>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.naam }}</td>
+                    <td>{{ user.tussenvoegsel }}</td>
+                    <td>{{ user.achternaam }}</td>
+                    <td>
+                        <a href="{{ path('user_show', {'id': user.id}) }}">V</a>
+                        {#                    <a href="{{ path('user_edit', {'id': user.id}) }}">edit</a>#}
+                    </td>
+                    <td>    {{ include('user/_delete_form.html.twig') }}</td>
+                </tr>
+            {%  elseif "ROLE_INSTRUCTEUR" in user.roles and app.request.get('_route') == 'instructeur_index' %}
+                <tr>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.naam }}</td>
+                    <td>{{ user.tussenvoegsel }}</td>
+                    <td>{{ user.achternaam }}</td>
+                    <td>
+                        <a href="{{ path('user_show', {'id': user.id}) }}">V</a>
+                        {#                    <a href="{{ path('user_edit', {'id': user.id}) }}">edit</a>#}
+                    </td>
+                    <td>    {{ include('user/_delete_form.html.twig') }}</td>
+                </tr>
+            {% endif %}
         {% else %}
             <tr>
-                <td colspan="16">no records found</td>
+                <td colspan="6">Geen User's Gevonden</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('user_new') }}">Create new</a>
+    </div>
+    {% if app.request.get('_route') == 'instructeur_index' %}
+        <a type="button" class="btn btn-outline-success"
+           href="{{ path('instructeur_new') }}">Aanmaken</a>
+    {% endif %}
 {% endblock %}

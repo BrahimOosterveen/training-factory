@@ -19,11 +19,11 @@ class PersoonRepository extends ServiceEntityRepository
         parent::__construct($registry, Persoon::class);
     }
 
-    // /**
-    //  * @return Persoon[] Returns an array of Persoon objects
-    //  */
-    /*
-    public function findByExampleField($value)
+     /**
+      * @return Persoon[] Returns an array of Persoon objects
+      */
+
+    public function getInstructor($value)
     {
         return $this->createQueryBuilder('p')
             ->andWhere('p.exampleField = :val')
@@ -34,7 +34,7 @@ class PersoonRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
-    */
+
 
     /*
     public function findOneBySomeField($value): ?Persoon

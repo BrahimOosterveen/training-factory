@@ -1,22 +1,5 @@
 {% extends 'base.html.twig' %}
 
-{% block nav %}
-    <ul class="navbar-nav" style="text-decoration: underline red">
-        <li class="nav-item ">
-            <a class="nav-link text-danger"  href="home.html.twig">Home <span class="sr-only ">(current)</span></a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link text-danger" href="inschrijven.html.twig"><b>Inschrijven op les</b></a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link text-danger" href="inschrijvingen.html.twig">Overzicht inschrijvingen</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link text-danger" href="#" tabindex="-1" aria-disabled="true">Gegevens lid wijzigen</a>
-        </li>
-    </ul>
-{% endblock %}
-
 {% block title %}Training index{% endblock %}
 
 {% block body %}
@@ -32,23 +15,27 @@
                 <th>Tijd</th>
                 <th>Kosten</th>
 {#                <th>actions</th>#}
+
                 <th>uitschrijven</th>
+
             </tr>
         </thead>
         <tbody>
         {% for training in trainings %}
             <tr>
 {#                <td>{{ training.id }}</td>#}
-                    <td>{{ training.image }}</td>
+{#                    <td>{{ training.image }}</td>#}
                     <td>{{ training.naam }}</td>
                     <td>{{ training.beschrijving }}</td>
                     <td>{{ training.tijd }}</td>
                     <td>{{ training.kosten }}</td>
+
                     <td>{{ include('training/_delete_form.html.twig') }}
 
                     <a  class="btn btn-outline-success" href="{{ path('training_show', {'id': training.id}) }}">meer informatie</a>
                     <a class="btn btn-outline-warning" href="{{ path('training_edit', {'id': training.id}) }}">edit</a>
                 </td>
+
             </tr>
         {% else %}
             <tr>

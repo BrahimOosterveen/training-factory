@@ -35,6 +35,6 @@ security:
     access_control:
          - { path: ^/admin, roles: ROLE_ADMIN }
          - { path: ^/instructeur, roles: ROLE_INSTRUCTEUR }
-         - { path: ^/profile, roles: ROLE_USER }
+         - { path: ^/user, roles: ROLE_USER }
 
 #         - { path: ^/profile, roles: ROLE_USE }

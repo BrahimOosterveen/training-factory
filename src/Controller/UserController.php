@@ -2,8 +2,13 @@
 
 namespace App\Controller;
 
+use App\Entity\Lessen;
+use App\Entity\Registreren;
 use App\Entity\User;
 use App\Form\UserType;
+use App\Repository\LessenRepository;
+use App\Repository\RegistrerenRepository;
+use App\Repository\TrainingRepository;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -16,58 +21,11 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
  */
 class UserController extends AbstractController
 {
-    /**
-     * @Route("/", name="user_index", methods={"GET"})
-     */
-    public function index(UserRepository $userRepository): Response
-    {
-        return $this->render('user/index.html.twig', [
-            'users' => $userRepository->findAll(),
-        ]);
-    }
-
-    /**
-     * @Route("/new", name="user_new", methods={"GET","POST"})
-     */
-    public function new(Request $request,UserPasswordEncoderInterface $encoder ): Response
-    {
-        $user = new User();
-        $form = $this->createForm(UserType::class, $user);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $encoded = $encoder->encodePassword($user, $user->getPassword());
-            /** @var UploadedFile $image */
-//            $image = $form['image']->getData();
-
-            $user->setPassword($encoded);
-            $entityManager->persist($user);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('user_index');
-        }
-
-        return $this->render('user/new.html.twig', [
-            'user' => $user,
-            'form' => $form->createView(),
-        ]);
-    }
-
-    /**
-     * @Route("/{id}", name="user_show", methods={"GET"})
-     */
-    public function show(User $user): Response
-    {
-        return $this->render('user/show.html.twig', [
-            'user' => $user,
-        ]);
-    }
 
     /**
      * @Route("/{id}/edit", name="user_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, User $user, UserPasswordEncoderInterface $encoder): Response
+    public function userEdit(Request $request, User $user, UserPasswordEncoderInterface $encoder): Response
     {
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
@@ -91,16 +49,61 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="user_delete", methods={"DELETE"})
+     * @Route("/inschrijven/datum/{date}" , name="app_inschrijven")
      */
-    public function delete(Request $request, User $user): Response
-    {
-        if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($user);
-            $entityManager->flush();
-        }
 
-        return $this->redirectToRoute('user_index');
+    public function datumLesson($date)
+    {
+
+
+        return $this->render('inschrijven.html.twig', [
+            'page_name' => 'app_inschrijven'
+        ]);
+    }
+
+    /**
+     * @Route("/inschrijven/datum/{date}" , name="app_latere_inschrijvingen")
+     */
+
+    public function latereLesson($date)
+    {
+        return $this->render('inschrijven.html.twig', [
+            'page_name' => 'app_latere_inschrijvingen'
+        ]);
+    }
+    /**
+     * @Route("/inschrijven/{id}" , name="app_nu_inschrijvingen")
+     */
+
+    public function inschrijvenLesson($id)
+    {
+        $les = $this->getDoctrine()
+            ->getRepository(Lessen::class)
+            ->find($id);
+
+        $user=$this->getUser();
+
+        $reg=new Registreren();
+        $reg->setLessen($les);
+        $reg->setUser($user);
+        $reg->setBetaling(true);
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($reg);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('home');
+    }
+
+    /**
+     * @Route("/lessen/{id}", name="lessen_show", methods={"GET"})
+     */
+    public function show(Lessen $lessen, RegistrerenRepository $registrerenRepository, UserRepository $userRepository): Response
+    {
+        return $this->render('lessen/show.html.twig', [
+            'lessen' => $lessen,
+            'users' => $userRepository->findAll(),
+            'registrerens' => $registrerenRepository->findAll(),
+        ]);
     }
 }

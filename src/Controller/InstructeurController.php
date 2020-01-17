@@ -1,6 +1,8 @@
 <?php
 
+
 namespace App\Controller;
+
 
 use App\Entity\Lessen;
 use App\Form\LessenType;
@@ -10,13 +12,14 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+
 /**
- * @Route("/lessen")
+ * @Route("/instructeur")
  */
-class LessenController extends AbstractController
+class InstructeurController extends AbstractController
 {
     /**
-     * @Route("/", name="lessen_index", methods={"GET"})
+     * @Route("/lessen/", name="lessen_index", methods={"GET"})
      */
     public function index(LessenRepository $lessenRepository): Response
     {
@@ -26,7 +29,7 @@ class LessenController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="lessen_new", methods={"GET","POST"})
+     * @Route("/lessen/new", name="lessen_new", methods={"GET","POST"})
      */
     public function new(Request $request): Response
     {
@@ -48,18 +51,18 @@ class LessenController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/{id}", name="lessen_show", methods={"GET"})
-     */
-    public function show(Lessen $lessen): Response
-    {
-        return $this->render('lessen/show.html.twig', [
-            'lessen' => $lessen,
-        ]);
-    }
+//    /**
+//     * @Route("/lessen/{id}", name="lessen_show", methods={"GET"})
+//     */
+//    public function show(Lessen $lessen): Response
+//    {
+//        return $this->render('lessen/show.html.twig', [
+//            'lessen' => $lessen,
+//        ]);
+//    }
 
     /**
-     * @Route("/{id}/edit", name="lessen_edit", methods={"GET","POST"})
+     * @Route("/lessen/{id}/edit", name="lessen_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Lessen $lessen): Response
     {
@@ -79,7 +82,7 @@ class LessenController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="lessen_delete", methods={"DELETE"})
+     * @Route("/lessen/{id}", name="lessen_delete", methods={"DELETE"})
      */
     public function delete(Request $request, Lessen $lessen): Response
     {

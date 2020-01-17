@@ -22,36 +22,41 @@
 
     <table class="table">
         <tbody>
-            <tr>
-                <th>Training</th>
-                <td>{{ lessen.training.naam }}</td>
-            </tr>
-            <tr>
-                <th>Tijd</th>
-                <td>{{ lessen.tijd ? lessen.tijd|date('H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Datum</th>
-                <td>{{ lessen.datum ? lessen.datum|date('Y-m-d') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Locatie</th>
-                <td>{{ lessen.locatie }}</td>
-            </tr>
-            <tr>
-                <th>lokaal</th>
-                <td>{{ lessen.lokaal }}</td>
-            </tr>
-            <tr>
-                <th>Max_personen</th>
-                <td>{{ lessen.maxPersonen }}</td>
-            </tr>
+        <tr>
+            <th>Training</th>
+            <td>{{ lessen.training.naam }}</td>
+        </tr>
+        <tr>
+            <th>Tijd</th>
+            <td>{{ lessen.tijd ? lessen.tijd|date('H:i:s') : '' }}</td>
+        </tr>
+        <tr>
+            <th>Datum</th>
+            <td>{{ lessen.datum ? lessen.datum|date('Y-m-d') : '' }}</td>
+        </tr>
+        <tr>
+            <th>Locatie</th>
+            <td>{{ lessen.locatie }}</td>
+        </tr>
+        <tr>
+            <th>lokaal</th>
+            <td>{{ lessen.lokaal }}</td>
+        </tr>
+        <tr>
+            <th>Max_personen</th>
+            <td>{{ lessen.maxPersonen }}</td>
+        </tr>
         </tbody>
     </table>
-
-{#    <a href="{{ path('lessen_index') }}">back to list</a>#}
-
-    <a href="{{ path('app_nu_inschrijvingen', {'id': lessen.id}) }}">inschrijven</a>
-
-{#    {{ include('lessen/_delete_form.html.twig') }}#}
+    {#    <a href="{{ path('lessen_index') }}">back to list</a>#}
+    {#    {% for user in users %}#}
+    {% for registreren in registrerens %}
+        {% if app.user.id == registreren.user.id and registreren.lessen.id != lessen.id %}
+            <a href="{{ path('app_nu_inschrijvingen', {'id': lessen.id}) }}">inschrijven</a>
+        {% else %}
+            <a href="">Kan niet inschijven</a>
+        {% endif %}
+    {% endfor %}
+    {#    {% endfor %}#}
+    {#    {{ include('lessen/_delete_form.html.twig') }}#}
 {% endblock %}
