@@ -1,0 +1,98 @@
+{% extends 'base.html.twig' %}
+
+
+
+{% block body %}
+    <link rel="stylesheet" href="{{ asset('css/inschrijven.css') }}"/>
+    <h3 style="margin: 50px 0px 0px 50px;">Inschrijven op les</h3>
+
+
+{#    <ul class="schedule__tabs only-regular" style="background-color: lightgrey; padding: 10px ; margin-left: 50px;"#}
+{#        role="tablist">#}
+{#        <li class="schedule__item">#}
+{#            <a class="is-active js-schedule-date" style="text-decoration:none;"#}
+{#               href="{{ path('inschrijven', {date:date("now")|date("d-m-Y")}) }}">VANDAAG</a></li>#}
+{#        {% for i in 1..13 %}#}
+{#            <li class="schedule__item"><a class="is-active js-schedule-date"#}
+{#                                          style="margin-left: 10px; text-decoration:none; "#}
+{#                                          href="{{ path('inschrijven', {date:date("now")|date_modify("+#{i} day")|date("d-m-Y")}) }}"> {{ date("now")|date_modify("+#{i} day")|date("D d M") }} </a>#}
+{#            </li>#}
+{#            </li>#}
+{#        {% endfor %}#}
+{#    </ul>#}
+
+
+
+
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>Sport</th>
+        <th>Tijd</th>
+
+        <th>lokaal</th>
+        {#            <th>Max_personen</th>#}
+        <th>Max aantal personen</th>
+        <th>Inschrijven/uitschrijven</th>
+        {#            <th>Prijs</th>#}
+{#        <th>Deelnemerslijst</th>#}
+{#        <th>Aanpassen</th>#}
+    </tr>
+    </thead>
+    <tbody>
+    {% for lessen in lessens %}
+        <tr>
+{#            <td> <img src="{{ training.image }}.jpg" class="card-img" alt="..."></td>#}
+            <td>{{ lessen.training.naam }}</td>
+            <td>{{ lessen.tijd ? lessen.tijd|date('H:i') : '' }}</td>
+            <td>{{ lessen.lokaal }}</td>
+            <td>{{ lessen.maxPersonen }}</td>
+            {% set used = 'false' %}
+            {% for registreren in lessen.registrerens %}
+                {% if registreren.user.id == app.user.id %}
+                    <td>
+                    <form class="d-inline" method="post"
+                          action="{{  path('registreren_delete', {'id': registreren.id}) }}"
+                          onsubmit="return confirm('Weet je zeker dat je wilt uitschrijven?');">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <input type="hidden" name="_token"
+                               value="{{ csrf_token('delete' ~ registreren.id) }}">
+                        <style>
+                            form button:hover .ingeschreven {
+                                display: none;
+                            }
+
+                            form button:hover .uitschrijven {
+                                display: block !important;
+                            }
+                        </style>
+                        <button style="width: 120px;" class="btn btn-outline-danger">
+                            <span class="ingeschreven">Ingeschreven</span>
+                            <span class="uitschrijven d-none">Uitschrijven</span>
+                        </button>
+                    </form>
+                    </td>
+                    {% set used = 'true' %}
+                {% endif %}
+            {% endfor %}
+            {% if lessen.registrerens|length < lessen.maxpersonen and used == 'false' %}
+                <td><a style="width: 120px;"  type="button" class="btn btn-outline-primary"
+                       href="/user/inschrijven/{{ lessen.id }}">Inschrijven</a>
+                </td>
+            {% elseif used == 'false' %}
+                <td>
+                    <button  style="width: 120px;"  class="btn btn-outline-danger">Vol</button>
+                </td>
+            {% endif %}
+        </tr>
+
+        </tr>
+    {% else %}
+        <tr>
+            <td colspan="6">no records found</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

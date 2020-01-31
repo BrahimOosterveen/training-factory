@@ -1,20 +1,4 @@
 {% extends 'base.html.twig' %}
-{% block nav %}
-    <ul class="navbar-nav" style="text-decoration: underline red">
-        <li class="nav-item ">
-            <a class="nav-link text-danger"  href="home.html.twig">Home <span class="sr-only ">(current)</span></a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link text-danger" href="inschrijven.html.twig">Instructeur</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link text-danger" href="/user"><b>Leden</b></a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link text-danger" href="#" tabindex="-1" aria-disabled="true">Trainingen</a>
-        </li>
-    </ul>
-{% endblock %}
 {% block title %}User{% endblock %}
 
 {% block body %}
@@ -22,75 +6,169 @@
 
     <table class="table">
         <tbody>
-{#            <tr>#}
-{#                <th>Id</th>#}
-{#                <td>{{ user.id }}</td>#}
-{#            </tr>#}
+        {#            <tr>#}
+        {#                <th>Id</th>#}
+        {#                <td>{{ user.id }}</td>#}
+        {#            </tr>#}
+        <tr>
+            <th>Email</th>
+            <td>{{ user.email }}</td>
+        </tr>
+        {#            <tr>#}
+        {#                <th>Roles</th>#}
+        {#                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>#}
+        {#            </tr>#}
+        {#            <tr>#}
+        {#                <th>Password</th>#}
+        {#                <td>{{ user.password }}</td>#}
+        {#            </tr>#}
+        <tr>
+            <th>Loginnaam</th>
+            <td>{{ user.loginnaam }}</td>
+        </tr>
+        <tr>
+            <th>Naam</th>
+            <td>{{ user.naam }}</td>
+        </tr>
+        <tr>
+            <th>Tussenvoegsel</th>
+            <td>{{ user.tussenvoegsel }}</td>
+        </tr>
+        <tr>
+            <th>Achternaam</th>
+            <td>{{ user.achternaam }}</td>
+        </tr>
+        <tr>
+            <th>Geboortedatum</th>
+            <td>{{ user.geboortedatum ? user.geboortedatum|date('d-m-Y') : '' }}</td>
+        </tr>
+        <tr>
+            <th>Gender</th>
+            <td>{{ user.gender }}</td>
+        </tr>
+        <tr>
+            <th>Aanneemdatum</th>
+            <td>{{ user.aanneemdatum ? user.aanneemdatum|date('d-m-Y') : '' }}</td>
+        </tr>
+        <tr>
+            <th>Salaris</th>
+            <td>{{ user.salaris }}</td>
+        </tr>
+        <tr>
+            <th>Straat</th>
+            <td>{{ user.straat }}</td>
+        </tr>
+        <tr>
+            <th>Postcode</th>
+            <td>{{ user.postcode }}</td>
+        </tr>
+        <tr>
+            <th>Plaats</th>
+            <td>{{ user.plaats }}</td>
+        </tr>
+<tr>
+    <th>Disable</th>
+    <td></td>
+</tr>
+        {% if user.roles == ['ROLE_INSTRUCTEUR'] %}
             <tr>
-                <th>Email</th>
-                <td>{{ user.email }}</td>
+                <th>Omzet</th>
+                <td>
+                    {% set omzet = 0.00 %}
+                    {% for registration in registrerens %}
+                        {% if registration.lessen.instructeur.id == user.id %}
+                            {% if registration.betaling == true %}
+                                {% set omzet = omzet + registration.lessen.training.kosten %}
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
+                    €{{ omzet }}
+                </td>
             </tr>
-{#            <tr>#}
-{#                <th>Roles</th>#}
-{#                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>#}
-{#            </tr>#}
-{#            <tr>#}
-{#                <th>Password</th>#}
-{#                <td>{{ user.password }}</td>#}
-{#            </tr>#}
-            <tr>
-                <th>Loginnaam</th>
-                <td>{{ user.loginnaam }}</td>
-            </tr>
-            <tr>
-                <th>Naam</th>
-                <td>{{ user.naam }}</td>
-            </tr>
-            <tr>
-                <th>Tussenvoegsel</th>
-                <td>{{ user.tussenvoegsel }}</td>
-            </tr>
-            <tr>
-                <th>Achternaam</th>
-                <td>{{ user.achternaam }}</td>
-            </tr>
-            <tr>
-                <th>Geboortedatum</th>
-                <td>{{ user.geboortedatum ? user.geboortedatum|date('d-m-Y') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Gender</th>
-                <td>{{ user.gender }}</td>
-            </tr>
-            <tr>
-                <th>Aanneemdatum</th>
-                <td>{{ user.aanneemdatum ? user.aanneemdatum|date('d-m-Y') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Salaris</th>
-                <td>{{ user.salaris }}</td>
-            </tr>
-            <tr>
-                <th>Straat</th>
-                <td>{{ user.straat }}</td>
-            </tr>
-            <tr>
-                <th>Postcode</th>
-                <td>{{ user.postcode }}</td>
-            </tr>
-            <tr>
-                <th>Plaats</th>
-                <td>{{ user.plaats }}</td>
-            </tr>
+        {% endif %}
         </tbody>
     </table>
     {% if is_granted('ROLE_ADMIN') %}
-    <a href="{{ path('user_index') }}">back to list</a>
+        <a href="{{ path('user_index') }}">back to list</a>
 
-    <a href="{{ path('user_edit', {'id': user.id}) }}">edit</a>
+        <a href="{{ path('user_edit', {'id': user.id}) }}">edit</a>
         {{ include('user/_delete_form.html.twig') }}
     {% else %}
     {% endif %}
 
+
+    <br>
+    <h1 style="color: red">Overzicht inschrijven</h1>
+    <br>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Datum</th>
+            <th>Tijd</th>
+            <th>lokaal</th>
+            <th>Sport</th>
+            <th>Kosten</th>
+            {% if user.roles  != ['ROLE_INSTRUCTEUR'] %}
+            <th>Betaling</th>
+            {% endif %}
+        </tr>
+        </thead>
+        <tbody>
+        {% if user.roles  == ['ROLE_INSTRUCTEUR'] %}
+        {% for lessen in lessens %}
+            {% if lessen.instructeur.id == user.id %}
+                <tr>
+                    <td>{{ lessen.datum|date('d-m-Y') }}</td>
+                    <td>{{ lessen.tijd|date('H:i') }}</td>
+                    {#                    <td>{{ registreren.lessen.registrerens|length }}/{{ registreren.lessen.maxpersonen }}</td>#}
+                    <td>{{ lessen.lokaal }}</td>
+                    <td>{{ lessen.training.naam }}</td>
+                    <td>€{{ lessen.training.kosten }}</td>
+                    {#                    <td>{% if registreren.betaling == true %}#}
+                    {#                            <p class="btn btn-outline-success">Betaald</p>#}
+                    {#                        {% else %}#}
+                    {#                            <p class="btn btn-outline-success">niet Betaald</p>#}
+                    {#                        {% endif %}#}
+                    </td>
+                </tr>
+            {% elseif lessen.instructeur.id != user.id %}
+            {% else %}
+                <tr>
+                    <td colspan="6">Niks gevonden</td>
+                </tr>
+            {% endif %}
+        {% endfor %}
+        {% else %}
+            {% for registreren in registrerens %}
+            {% if registreren.user.id == user.id %}
+                <tr>
+                <td>{{ registreren.lessen.datum|date('d-m-Y') }}</td>
+                <td>{{ registreren.lessen.tijd|date('H:i') }}</td>
+                {#                    <td>{{ registreren.lessen.registrerens|length }}/{{ registreren.lessen.maxpersonen }}</td>#}
+                <td>{{ registreren.lessen.lokaal }}</td>
+                <td>{{ registreren.lessen.training.naam }}</td>
+                <td>€{{ registreren.lessen.training.kosten }}</td>
+                <td>{% if registreren.betaling == true %}
+                <p class="btn btn-outline-success">Betaald</p>
+            {% else %}
+                <p class="btn btn-outline-success">niet Betaald</p>
+                    {% endif %}
+                </td>
+                </tr>
+            {% elseif registreren.user.id != app.user.id %}
+            {% else %}
+                <tr>
+                    <td colspan="6">Niks gevonden</td>
+                </tr>
+            {% endif %}
+            {% else %}
+                <tr>
+                    <td colspan="6">Niks gevonden</td>
+                </tr>
+            {% endfor %}
+        {% endif %}
+
+        </tbody>
+    </table>
 
 {% endblock %}

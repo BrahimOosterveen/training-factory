@@ -56,7 +56,7 @@ class UserController extends AbstractController
     {
 
 
-        return $this->render('inschrijven.html.twig', [
+        return $this->render('user/inschrijven.html.twig', [
             'page_name' => 'app_inschrijven'
         ]);
     }
@@ -67,7 +67,7 @@ class UserController extends AbstractController
 
     public function latereLesson($date)
     {
-        return $this->render('inschrijven.html.twig', [
+        return $this->render('user/inschrijven.html.twig', [
             'page_name' => 'app_latere_inschrijvingen'
         ]);
     }
@@ -86,13 +86,13 @@ class UserController extends AbstractController
         $reg=new Registreren();
         $reg->setLessen($les);
         $reg->setUser($user);
-        $reg->setBetaling(true);
+        $reg->setBetaling(false);
 
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($reg);
         $entityManager->flush();
 
-        return $this->redirectToRoute('home');
+        return $this->redirectToRoute('inschrijven');
     }
 
     /**
@@ -100,9 +100,38 @@ class UserController extends AbstractController
      */
     public function show(Lessen $lessen, RegistrerenRepository $registrerenRepository, UserRepository $userRepository): Response
     {
-        return $this->render('lessen/show.html.twig', [
+        return $this->render('instructeur/show.html.twig', [
             'lessen' => $lessen,
             'users' => $userRepository->findAll(),
+            'registrerens' => $registrerenRepository->findAll(),
+        ]);
+    }
+
+    //registreren
+
+    /**
+     * @Route("/{id}", name="registreren_delete", methods={"DELETE"})
+     */
+    public function delete(Request $request, Registreren $registreren): Response
+    {
+        if ($this->isCsrfTokenValid('delete'.$registreren->getId(), $request->request->get('_token'))) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($registreren);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('inschrijven');
+    }
+
+    /**
+     * @Route("/overzicht" , name="overzicht-inschrijven")
+     */
+
+    public function overzicht(RegistrerenRepository $registrerenRepository)
+    {
+
+
+        return $this->render('user/overzicht-inschrijvingen.html.twig', [
             'registrerens' => $registrerenRepository->findAll(),
         ]);
     }

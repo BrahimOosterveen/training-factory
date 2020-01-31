@@ -54,6 +54,11 @@ class Lessen
      */
     private $registrerens;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\user", inversedBy="lessens")
+     */
+    private $instructeur;
+
     public function __construct()
     {
         $this->registrerens = new ArrayCollection();
@@ -163,6 +168,18 @@ class Lessen
                 $registreren->setLessenId(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getInstructeur(): ?user
+    {
+        return $this->instructeur;
+    }
+
+    public function setInstructeur(?user $instructeur): self
+    {
+        $this->instructeur = $instructeur;
 
         return $this;
     }

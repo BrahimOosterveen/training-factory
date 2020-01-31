@@ -1,0 +1,73 @@
+{% extends 'base.html.twig' %}
+{% block title %}Lessen{% endblock %}
+
+{% block body %}
+    <h1>Les</h1>
+
+    <table class="table">
+        <tbody>
+        <tr>
+            <th>Training</th>
+            <td>{{ lessen.training.naam }}</td>
+        </tr>
+        <tr>
+            <th>Tijd</th>
+            <td>{{ lessen.tijd ? lessen.tijd|date('H:i:s') : '' }}</td>
+        </tr>
+        <tr>
+            <th>Datum</th>
+            <td>{{ lessen.datum ? lessen.datum|date('Y-m-d') : '' }}</td>
+        </tr>
+        <tr>
+            <th>Locatie</th>
+            <td>{{ lessen.locatie }}</td>
+        </tr>
+        <tr>
+            <th>lokaal</th>
+            <td>{{ lessen.lokaal }}</td>
+        </tr>
+        <tr>
+            <th>Max_personen</th>
+            <td>{{ lessen.maxPersonen }}</td>
+        </tr>
+        </tbody>
+    </table>
+    <h1>Inschrijvingen</h1>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Naam</th>
+            <th>Payment</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for registreren in registrerens %}
+            {% if registreren.lessen.id == lessen.id %}
+                <tr>
+                    <td>{{ registreren.user.naam }} {{ registreren.user.achternaam }}</td>
+                    <td>
+                        {% if registreren.betaling == false %}
+                            <form class="d-inline" method="post"
+                                  action="{{ path('user_betaal', {'id': registreren.id}) }}"
+                                  onsubmit="return confirm('Weet je zeker dat de klant heeft betaald?');">
+                                <input type="hidden" name="_method" value="BETAAL">
+                                <button class="btn btn-outline-warning d-inline">Betalen</button>
+                            </form>
+                        {% else %}
+                            <p class="btn btn-outline-success">Betaald</p>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endif %}
+        {% endfor %}
+
+        </tbody>
+    </table>
+
+    <a class="btn btn-outline-success" href="{{ path('lessen_index') }}">back to list</a>
+
+    <a class="btn btn-outline-warning" href="{{ path('lessen_edit', {'id': lessen.id}) }}">edit</a>
+
+{% endblock %}
+
+

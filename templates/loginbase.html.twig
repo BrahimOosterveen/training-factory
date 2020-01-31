@@ -28,24 +28,127 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
         {#{% include 'navbar.html.twig' %}#}
-        {% block nav %}{% endblock %}
+        {% block nav %}
+            {% if is_granted('ROLE_ADMIN') %}
+                <ul class="navbar-nav" style="text-decoration: underline red">
+                    <li class="nav-item">
+                        <a class="nav-link text-danger"
+                           href="/" {% if app.request.get('_route') == 'home' %} style="font-weight: bold" {% endif %}>
+                            Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-danger"
+                           href="/admin/instructeur/beheer" {% if app.request.get('_route') == 'instructeur_index' %} style="font-weight: bold" {% endif %}>
+                            Instructeurs</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-danger"
+                           href="/admin/user" {% if app.request.get('_route') == 'user_index' %} style="font-weight: bold" {% endif %}>
+                            Leden</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-danger"
+                           href="/training" {% if app.request.get('_route') == 'training_index' %} style="font-weight: bold" {% endif %}>
+                            Trainingen</a>
+                    </li>
+                </ul>
+            {% elseif is_granted('ROLE_INSTRUCTEUR') %}
+                <ul class="navbar-nav" style="text-decoration: underline red">
+                    <li class="nav-item">
+                        <a class="nav-link text-danger"
+                           href="/" {% if app.request.get('_route') == 'home' %} style="font-weight: bold" {% endif %}>
+                            Home</a>
+                    </li>
+                    <li class="nav-item text-danger">
+                        <a class="nav-link text-danger"
+                           href="/instructeur/lessen/new" {% if app.request.get('_route') == '' %} style="font-weight: bold" {% endif %}>
+                            plannen lessen</a>
+                    </li>
+                    <li class="nav-item text-danger">
+                        <a class="nav-link text-danger"
+                           href="/instructeur/lessen/" {% if app.request.get('_route') == '' %} style="font-weight: bold" {% endif %}>
+                            Lessen beheer</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-danger"
+                           href="/instructeur/{{ app.user.id }}/edit" {% if app.request.get('_route') == '/user/{{ app.user.id }}/edit' %} style="font-weight: bold" {% endif %}>
+                            {#                           href="/user/17/edit" {% if app.request.get('_route') == '' %} style="font-weight: bold" {% endif %}>#}
+                            {#                        href="{{ path('user_show', {'id': user.id}) }}">#}
+                            Gegevens instructeur wijzigen</a>
+                    </li>
+                </ul>
+            {% elseif is_granted('ROLE_USER') %}
+                <ul class="navbar-nav" style="text-decoration: underline red">
+                    <li class="nav-item">
+                        <a class="nav-link text-danger"
+                           href="/" {% if app.request.get('_route') == 'home' %} style="font-weight: bold" {% endif %}>
+                            Home</a>
+                    </li>
+                    <li class="nav-item text-danger">
+                        <a class="nav-link text-danger"
+                           href="/inschrijven" {% if app.request.get('_route') == 'inschrijven' %} style="font-weight: bold" {% endif %}>
+                            Inschrijven op les</a>
+                    </li>
+                    <li class="nav-item text-danger">
+                        <a class="nav-link text-danger"
+                           href="user/overzicht" {% if app.request.get('_route') == 'Lessen' %} style="font-weight: bold" {% endif %}>
+                            Overzicht inschrijven</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-danger"
+                           href="/user/{{ app.user.id }}/edit" {% if app.request.get('_route') == '/user/{{ app.user.id }}/edit' %} style="font-weight: bold" {% endif %}>
+                            {#                           href="/user/17/edit" {% if app.request.get('_route') == '' %} style="font-weight: bold" {% endif %}>#}
+                            {#                        href="{{ path('user_show', {'id': user.id}) }}">#}
+                            Gegevens lid wijzigen</a>
+                    </li>
+                </ul>
+            {% else %}
+                <ul class="navbar-nav" style="text-decoration: underline red">
+                    <li class="nav-item">
+                        <a class="nav-link text-danger"
+                           href="/" {% if app.request.get('_route') == 'home' %} style="font-weight: bold" {% endif %}>
+                            Home</a>
+                    </li>
+                    <li class="nav-item text-danger">
+                        <a class="nav-link text-danger"
+                           href="/training" {% if app.request.get('_route') == 'training_index' %} style="font-weight: bold" {% endif %}>
+                            Trainings Aanbod</a>
+                    </li>
+                    <li class="nav-item text-danger">
+                        <a class="nav-link text-danger"
+                           href="/new" {% if app.request.get('_route') == 'user_new' %} style="font-weight: bold" {% endif %}>
+                            Lid Worden</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-danger"
+                           href="/gedragsregel" {% if app.request.get('_route') == '' %} style="font-weight: bold" {% endif %}>
+                            Gedrachtsregels</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-danger"
+                           href="/lokatie" {% if app.request.get('_route') == 'lokatie' %} style="font-weight: bold" {% endif %}>
+                            Lokatie & contact</a>
+                    </li>
+                </ul>
+            {% endif %}
+        {% endblock %}
     </div>
 </nav>
 
 <main class="container-expand-sm border border-secondary" style="margin: 0px 20px 0px 20px;">
     <div class="card-group" style="margin-left: 20px;">
         <div class="card">
-            <img src="{{ asset('img/kickboksen.jpg') }}" class="card-img-top"
+            <img src="{{ asset('kickboksen.jpg') }}" class="card-img-top"
                  style="width: 600px;">
         </div>
 
         <div class="card">
-            <img src="{{ asset('img/kickboksen.jpg') }}" class="card-img-top"
+            <img src="{{ asset('kickboksen.jpg') }}" class="card-img-top"
                  style="width: 600px;">
 
         </div>
         <div class="card">
-            <img src="{{ asset('img/kickboksen.jpg') }}" class="card-img-top"
+            <img src="{{ asset('kickboksen.jpg') }}" class="card-img-top"
                  style="width: 600px;">
 
         </div>

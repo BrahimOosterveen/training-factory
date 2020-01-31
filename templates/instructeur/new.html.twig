@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Lessen{% endblock %}
+
+{% block body %}
+
+
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    <button class="btn btn-succes">{{ button_label|default('maak les') }}</button>
+    {{ form_end(form) }}
+
+    <a href="{{ path('lessen_index') }}">Terug</a>
+{% endblock %}

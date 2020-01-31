@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <br>
+    <h1 style="color: red">Overzicht inschrijven</h1>
+    <br>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Training</th>
+            <th>Tijd</th>
+            <th>Max-personen</th>
+            <th>prijs</th>
+            <th>Uitschrijven</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for registreren in registrerens %}
+            {% if registreren.user.id == app.user.id %}
+            <tr>
+                <td>{{ registreren.lessen.training.naam }}</td>
+                <td>{{ registreren.lessen.tijd|date('H:i') }}</td>
+                <td>{{ registreren.lessen.registrerens|length }}/{{ registreren.lessen.maxpersonen }}</td>
+                <td>€{{ registreren.lessen.training.kosten }}</td>
+                <td>{{ include('registreren/_delete_form.html.twig') }}</td>
+            </tr>
+            {% else %}
+
+            {% endif %}
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

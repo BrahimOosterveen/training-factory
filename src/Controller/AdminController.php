@@ -8,6 +8,8 @@ use App\Entity\Training;
 use App\Entity\User;
 use App\Form\TrainingType;
 use App\Form\UserType;
+use App\Repository\LessenRepository;
+use App\Repository\RegistrerenRepository;
 use App\Repository\TrainingRepository;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -28,7 +30,7 @@ class AdminController extends AbstractController
 //     */
 //    public function trainingIndex(TrainingRepository $trainingRepository): Response
 //    {
-//        return $this->render('training/index.html.twig', [
+//        return $this->render('training/trainingindex.html.twig', [
 //            'trainings' => $trainingRepository->findAll(),
 //        ]);
 //    }
@@ -50,7 +52,7 @@ class AdminController extends AbstractController
             return $this->redirectToRoute('training_index');
         }
 
-        return $this->render('training/new.html.twig', [
+        return $this->render('admin/new.html.twig', [
             'training' => $training,
             'form' => $form->createView(),
         ]);
@@ -61,7 +63,7 @@ class AdminController extends AbstractController
      */
     public function trainingShow(Training $training): Response
     {
-        return $this->render('training/show.html.twig', [
+        return $this->render('admin/show.html.twig', [
             'training' => $training,
         ]);
     }
@@ -80,7 +82,7 @@ class AdminController extends AbstractController
             return $this->redirectToRoute('training_index');
         }
 
-        return $this->render('training/edit.html.twig', [
+        return $this->render('admin/edit.html.twig', [
             'training' => $training,
             'form' => $form->createView(),
         ]);
@@ -117,10 +119,12 @@ class AdminController extends AbstractController
     /**
      * @Route("/user/{id}", name="user_show", methods={"GET"})
      */
-    public function userShow(User $user): Response
+    public function userShow(User $user, RegistrerenRepository $registrerenRepository, LessenRepository $lessenRepository): Response
     {
         return $this->render('user/show.html.twig', [
             'user' => $user,
+            'registrerens' => $registrerenRepository->findAll(),
+            'lessens' => $lessenRepository->findAll(),
         ]);
     }
 
@@ -135,7 +139,7 @@ class AdminController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('user_index');
+        return $this->redirectToRoute('home');
     }
 
 
@@ -184,6 +188,7 @@ class AdminController extends AbstractController
         ]);
     }
 
+//disablen
 
 
 

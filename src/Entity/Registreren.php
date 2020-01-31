@@ -17,7 +17,7 @@ class Registreren
     private $id;
 
     /**
-     * @ORM\Column(type="decimal", precision=10, scale=2)
+     * @ORM\Column(type="boolean")
      */
     private $betaling;
 

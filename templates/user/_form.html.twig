@@ -1,9 +1,11 @@
 {{ form_start(form) }}
-<div style="margin: 50px 0px 20px 50px; padding: 1px 600px 1px 150px;"  class="border">
+{#<div style="margin: 50px 0px 20px 50px; padding: 1px 600px 1px 150px;"  class="border">#}
+    {% if app.request.get('_route') == 'user_new' %}
 <h3 >Lid worden</h3>
 <br>
 <p>Om gebruik te maken van de lessen moet je biuj ons bekend zijn<br>
     Vul hieronder alle gegevens in en registreer jezelf</p>
+    {% endif %}
     {{ form_widget(form) }}
 
     <div style="margin-left: 1000px;">

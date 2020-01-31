@@ -9,6 +9,7 @@
               integrity="sha384-SI27wrMjH3ZZ89r4o+fGIJtnzkAnFs3E4qz9DIYioCQ5l9Rd/7UAa8DHcaL8jkWt"
               crossorigin="anonymous">
         <link rel="stylesheet" href="{{ asset('css/login.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/inschrijven.css') }}">
 
     {% endblock %}
 </head>
@@ -55,7 +56,7 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-danger"
-                           href="admin/instructeur/beheer" {% if app.request.get('_route') == 'instructeur_index' %} style="font-weight: bold" {% endif %}>
+                           href="/admin/instructeur/beheer" {% if app.request.get('_route') == 'instructeur_index' %} style="font-weight: bold" {% endif %}>
                             Instructeurs</a>
                     </li>
                     <li class="nav-item">
@@ -78,13 +79,20 @@
                     </li>
                     <li class="nav-item text-danger">
                         <a class="nav-link text-danger"
-                           href="/lessen/new" {% if app.request.get('_route') == '' %} style="font-weight: bold" {% endif %}>
+                           href="/instructeur/lessen/new" {% if app.request.get('_route') == '' %} style="font-weight: bold" {% endif %}>
                             plannen lessen</a>
                     </li>
                     <li class="nav-item text-danger">
                         <a class="nav-link text-danger"
-                           href="/#" {% if app.request.get('_route') == '' %} style="font-weight: bold" {% endif %}>
+                           href="/instructeur/lessen/" {% if app.request.get('_route') == '' %} style="font-weight: bold" {% endif %}>
                             Lessen beheer</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-danger"
+                           href="/instructeur/{{ app.user.id }}/edit" {% if app.request.get('_route') == '/user/{{ app.user.id }}/edit' %} style="font-weight: bold" {% endif %}>
+                            {#                           href="/user/17/edit" {% if app.request.get('_route') == '' %} style="font-weight: bold" {% endif %}>#}
+                            {#                        href="{{ path('user_show', {'id': user.id}) }}">#}
+                            Gegevens instructeur wijzigen</a>
                     </li>
                 </ul>
             {% elseif is_granted('ROLE_USER') %}
@@ -101,7 +109,7 @@
                     </li>
                     <li class="nav-item text-danger">
                         <a class="nav-link text-danger"
-                           href="/Lessen" {% if app.request.get('_route') == 'Lessen' %} style="font-weight: bold" {% endif %}>
+                           href="user/overzicht" {% if app.request.get('_route') == 'Lessen' %} style="font-weight: bold" {% endif %}>
                             Overzicht inschrijven</a>
                     </li>
                     <li class="nav-item">
@@ -126,7 +134,7 @@
                     </li>
                     <li class="nav-item text-danger">
                         <a class="nav-link text-danger"
-                           href="/new" {% if app.request.get('_route') == 'Lid Worden' %} style="font-weight: bold" {% endif %}>
+                           href="/new" {% if app.request.get('_route') == 'user_new' %} style="font-weight: bold" {% endif %}>
                             Lid Worden</a>
                     </li>
                     <li class="nav-item">
@@ -136,7 +144,7 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-danger"
-                           href="/lokatie" {% if app.request.get('_route') == 'Lokatie & contact' %} style="font-weight: bold" {% endif %}>
+                           href="/lokatie" {% if app.request.get('_route') == 'lokatie' %} style="font-weight: bold" {% endif %}>
                             Lokatie & contact</a>
                     </li>
                 </ul>
@@ -144,32 +152,39 @@
         {% endblock %}
     </div>
 </nav>
-
-<main class="container-expand-sm border border-secondary" style="margin: 0px 20px 0px 20px;">
-    <div class="card-group" style="margin-left: 20px;">
+<div class="container">
+{#<main class="container-expand-sm border border-secondary" style="margin: 0px 20px 0px 20px;">#}
+    <div class="card-group" >
         <div class="card">
             <img src="{{ asset('kickboksen.jpg') }}" class="card-img-top"
-                 style="width: 600px;">
+                 >
         </div>
 
         <div class="card">
             <img src="{{ asset('kickboksen.jpg') }}" class="card-img-top"
-                 style="width: 600px;">
+                 >
 
         </div>
         <div class="card">
             <img src="{{ asset('kickboksen.jpg') }}" class="card-img-top"
-                 style="width: 600px;">
+                 >
 
         </div>
     </div>
     <div class="row" style="margin-left: 0px;">
         {% block body %}{% endblock %}
-    </div>
-</main>
-
+{#    </div>#}
+{#</main>#}
+</div>
+</div>
 <!-- Footer -->
-<footer class="page-footer font-small .bg-secondary" style="background-color: grey; margin-top: 50px;">
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<footer class="page-footer font-small .bg-secondary fixed-bottom" style="background-color: grey; margin-top: 50px;">
     <div class="footer-copyright text-center py-5" style="background-color: grey;">© 2018 Copyright:
         <a href="https://mdbootstrap.com/education/bootstrap/"> MDBootstrap.com</a>
     </div>

@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Registreren;
 use App\Entity\User;
 use App\Form\UserType;
 use App\Repository\LessenRepository;
@@ -48,7 +49,7 @@ class BezoekersController extends AbstractController
 
     public function inschrijvenOverzicht(TrainingRepository $trainingRepository, LessenRepository $lessenRepository, RegistrerenRepository $registrerenRepository): Response
     {
-        return $this->render('inschrijven.html.twig', [
+        return $this->render('user/inschrijven.html.twig', [
             'trainings' => $trainingRepository->findAll(),
             'lessens' => $lessenRepository->findAll(),
             'registrerens' => $registrerenRepository->findAll(),
@@ -56,14 +57,12 @@ class BezoekersController extends AbstractController
     }
 
     /**
-     * @Route("/lokatie")
+     * @Route("/lokatie", name="lokatie")
      */
 
     public function lokatieencontact()
     {
-        return $this->render('lokatieencontact.html.twig', [
-            'title' => ucwords(str_replace('-', ' ', '-')),
-        ]);
+        return $this->render('bezoekers/lokatieencontact.html.twig');
     }
 
     /**
@@ -72,7 +71,7 @@ class BezoekersController extends AbstractController
 
     public function gedragsregels()
     {
-        return $this->render('gedragsregel.html.twig');
+        return $this->render('bezoekers/gedragsregel.html.twig');
     }
 
     /**
@@ -120,12 +119,15 @@ class BezoekersController extends AbstractController
      */
     public function trainingIndex(TrainingRepository $trainingRepository, UserRepository $userRepository): Response
     {
-        return $this->render('training/index.html.twig', [
+        return $this->render('admin/trainingindex.html.twig', [
             'trainings' => $trainingRepository->findAll(),
             'users' => $userRepository->findAll()
 
         ]);
     }
+
+
+
 }
 
 

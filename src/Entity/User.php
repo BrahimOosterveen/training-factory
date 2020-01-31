@@ -103,9 +103,15 @@ class User implements UserInterface
      */
     private $registrerens;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Lessen", mappedBy="instructeur")
+     */
+    private $lessens;
+
     public function __construct()
     {
         $this->registrerens = new ArrayCollection();
+        $this->lessens = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -336,6 +342,37 @@ class User implements UserInterface
             // set the owning side to null (unless already changed)
             if ($registreren->getUserId() === $this) {
                 $registreren->setUserId(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Lessen[]
+     */
+    public function getLessens(): Collection
+    {
+        return $this->lessens;
+    }
+
+    public function addLessen(Lessen $lessen): self
+    {
+        if (!$this->lessens->contains($lessen)) {
+            $this->lessens[] = $lessen;
+            $lessen->setInstructeur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLessen(Lessen $lessen): self
+    {
+        if ($this->lessens->contains($lessen)) {
+            $this->lessens->removeElement($lessen);
+            // set the owning side to null (unless already changed)
+            if ($lessen->getInstructeur() === $this) {
+                $lessen->setInstructeur(null);
             }
         }
 

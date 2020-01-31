@@ -5,12 +5,18 @@ namespace App\Controller;
 
 
 use App\Entity\Lessen;
+use App\Entity\Registreren;
+use App\Entity\User;
 use App\Form\LessenType;
+use App\Form\UserType;
 use App\Repository\LessenRepository;
+use App\Repository\RegistrerenRepository;
+use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 
 /**
@@ -23,7 +29,7 @@ class InstructeurController extends AbstractController
      */
     public function index(LessenRepository $lessenRepository): Response
     {
-        return $this->render('lessen/index.html.twig', [
+        return $this->render('instructeur/index.html.twig', [
             'lessens' => $lessenRepository->findAll(),
         ]);
     }
@@ -34,10 +40,12 @@ class InstructeurController extends AbstractController
     public function new(Request $request): Response
     {
         $lessen = new Lessen();
+        $user = $this->getUser();
         $form = $this->createForm(LessenType::class, $lessen);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $lessen->setInstructeur($user);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($lessen);
             $entityManager->flush();
@@ -45,7 +53,7 @@ class InstructeurController extends AbstractController
             return $this->redirectToRoute('lessen_index');
         }
 
-        return $this->render('lessen/new.html.twig', [
+        return $this->render('instructeur/new.html.twig', [
             'lessen' => $lessen,
             'form' => $form->createView(),
         ]);
@@ -75,7 +83,7 @@ class InstructeurController extends AbstractController
             return $this->redirectToRoute('lessen_index');
         }
 
-        return $this->render('lessen/edit.html.twig', [
+        return $this->render('instructeur/edit.html.twig', [
             'lessen' => $lessen,
             'form' => $form->createView(),
         ]);
@@ -93,5 +101,57 @@ class InstructeurController extends AbstractController
         }
 
         return $this->redirectToRoute('lessen_index');
+    }
+
+
+    /**
+     * @Route("/lessen/{id}", name="lessen", methods={"GET"})
+     */
+    public function show(Lessen $lessen, RegistrerenRepository $registrerenRepository, UserRepository $userRepository): Response
+    {
+        return $this->render('instructeur/show.html.twig', [
+            'lessen' => $lessen,
+            'users' => $userRepository->findAll(),
+            'registrerens' => $registrerenRepository->findAll(),
+        ]);
+    }
+
+
+    /**
+     * @Route("/lessen/betaal/{id}", name="user_betaal", methods={"BETAAL"})
+     */
+    public function betaalt(Request $request, Registreren $registreren): Response
+{
+        $entityManager = $this->getDoctrine()->getManager();
+    $registreren->setBetaling(true);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('lessen', ['id'=>$registreren->getLessen()->getId()]);
+    }
+
+    /**
+     * @Route("/{id}/edit", name="instructeur_edit", methods={"GET","POST"})
+     */
+    public function instructeurEdit(Request $request, User $user, UserPasswordEncoderInterface $encoder): Response
+    {
+        $form = $this->createForm(UserType::class, $user);
+        $form->handleRequest($request);
+
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $encoded = $encoder->encodePassword($user, $user->getPassword());
+            $user->setPassword($encoded);
+            $entityManager->persist($user);
+            $entityManager->flush();
+
+
+            return $this->redirectToRoute('home');
+        }
+
+        return $this->render('user/edit.html.twig', [
+            'user' => $user,
+            'form' => $form->createView(),
+        ]);
     }
 }

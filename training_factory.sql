@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.1
+-- version 5.0.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Gegenereerd op: 17 jan 2020 om 12:21
--- Serverversie: 10.4.8-MariaDB
--- PHP-versie: 7.1.33
+-- Gegenereerd op: 31 jan 2020 om 11:34
+-- Serverversie: 10.4.11-MariaDB
+-- PHP-versie: 7.4.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -37,22 +37,24 @@ CREATE TABLE `lessen` (
   `locatie` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `max_personen` int(11) NOT NULL,
   `training_id` int(11) NOT NULL,
-  `lokaal` int(11) NOT NULL
+  `lokaal` int(11) NOT NULL,
+  `instructeur_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Gegevens worden geëxporteerd voor tabel `lessen`
 --
 
-INSERT INTO `lessen` (`id`, `tijd`, `datum`, `locatie`, `max_personen`, `training_id`, `lokaal`) VALUES
-(1, '06:00:00', '2019-12-16', 'delft', 12, 9, 1),
-(2, '06:00:00', '2019-12-14', 'delft', 11, 2, 0),
-(3, '06:00:00', '2019-12-15', 'den haag', 4, 1, 0),
-(4, '06:05:00', '2015-01-01', '', 1, 1, 999),
-(5, '08:00:00', '2015-01-01', '', 22, 7, 12),
-(6, '00:00:00', '2015-01-01', '', 120200202, 1, 2),
-(7, '11:00:00', '2020-01-01', '', 14, 1, 4),
-(8, '05:05:00', '2020-03-19', 'Den haag rofl lmao', 15, 10, 4);
+INSERT INTO `lessen` (`id`, `tijd`, `datum`, `locatie`, `max_personen`, `training_id`, `lokaal`, `instructeur_id`) VALUES
+(1, '06:00:00', '2019-12-16', 'delft', 1, 9, 1, 16),
+(2, '06:00:00', '2019-12-14', 'delft', 11, 2, 2, 16),
+(3, '06:00:00', '2019-12-15', 'den haag', 4, 1, 10, 1),
+(4, '06:05:00', '2015-01-01', '', 1, 1, 999, 1),
+(5, '08:00:00', '2015-01-01', '', 22, 7, 12, 1),
+(6, '00:00:00', '2015-01-01', '', 120200202, 1, 2, 1),
+(7, '11:00:00', '2020-01-01', '', 14, 1, 4, 1),
+(8, '05:05:00', '2020-03-19', 'Den haag ', 15, 10, 4, 1),
+(11, '00:00:00', '2015-01-01', '1', 1, 1, 1, 16);
 
 -- --------------------------------------------------------
 
@@ -70,21 +72,8 @@ CREATE TABLE `migration_versions` (
 --
 
 INSERT INTO `migration_versions` (`version`, `executed_at`) VALUES
-('20191209111038', '2019-12-09 11:11:07'),
-('20191209113403', '2019-12-09 11:34:16'),
-('20191209113949', '2019-12-09 11:40:00'),
-('20191210100940', '2019-12-10 10:10:28'),
-('20191210101205', '2019-12-10 10:12:33'),
-('20191210104130', '2019-12-10 10:41:59'),
-('20191210104239', '2019-12-10 10:43:04'),
-('20191213085727', '2019-12-13 08:58:18'),
-('20191216124557', '2019-12-16 12:48:08'),
-('20191216124733', '2019-12-16 12:48:09'),
-('20191218083808', '2019-12-18 08:38:54'),
-('20191218083830', '2019-12-18 08:38:54'),
-('20191218110833', '2019-12-18 11:10:04'),
-('20191218110858', '2019-12-18 11:10:04'),
-('20200110111019', '2020-01-10 11:38:36');
+('20200130115830', '2020-01-30 11:58:48'),
+('20200130120034', '2020-01-30 12:01:27');
 
 -- --------------------------------------------------------
 
@@ -94,7 +83,7 @@ INSERT INTO `migration_versions` (`version`, `executed_at`) VALUES
 
 CREATE TABLE `registreren` (
   `id` int(11) NOT NULL,
-  `betaling` decimal(10,2) NOT NULL,
+  `betaling` tinyint(1) NOT NULL,
   `user_id` int(11) DEFAULT NULL,
   `lessen_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -104,7 +93,11 @@ CREATE TABLE `registreren` (
 --
 
 INSERT INTO `registreren` (`id`, `betaling`, `user_id`, `lessen_id`) VALUES
-(22, '1.00', 20, 1);
+(34, 1, 18, 2),
+(35, 1, 20, 2),
+(36, 1, 20, 1),
+(37, 0, 17, 2),
+(39, 0, 17, 3);
 
 -- --------------------------------------------------------
 
@@ -129,7 +122,6 @@ INSERT INTO `training` (`id`, `naam`, `beschrijving`, `tijd`, `kosten`, `image`)
 (1, 'MMA', 'hierbij gaan we MMA oefenen', '1:00:00', '20.00', 'boksen'),
 (2, 'stootzak training', 'hierbij gaan we oefenen', '00:30:00', '20.00', 'kickboksen'),
 (7, 'Boksen', 'boksen in de ring', '13:00', '5.50', 'boksen'),
-(8, 'kickboksen', 'vechten', '13:00', '10.20', 'kickboksen'),
 (9, 'basketbal', 'stuiteren', '15:00', '5.00', 'boksen'),
 (10, 'voetbal', 'gokken', '13:00', '1.00', 'kickboksen');
 
@@ -162,13 +154,12 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `email`, `roles`, `password`, `loginnaam`, `naam`, `tussenvoegsel`, `achternaam`, `geboortedatum`, `gender`, `aanneemdatum`, `salaris`, `straat`, `postcode`, `plaats`) VALUES
-(1, 'brahim701222@gmail.com', '[\"ROLE_ADMIN\"]', '$2y$13$DKm7VHVAb1t943RyIceZ3OUWptnozB1wlvocTZSywZsN6tEBw7g1e', 'Brahim Oosterveen', 'Brahim', '', 'Oosterveen', '2001-12-22', 'm', '2019-12-10', '2300.00', 'hemstraat 8', '1234FG', 'Schipluiden'),
-(16, 'instructeur@gmail.com', '[\"ROLE_INSTRUCTEUR\"]', '$argon2id$v=19$m=65536,t=4,p=1$b211bDExSXZoUkE3UGVqOA$7627TO9JkcgRLlHSqC26rUzGvSo+7cR8Rtb7pGufrYM', NULL, 'Instructeur', NULL, 'qwerty', '2001-12-22', 'man', NULL, NULL, 'dildenberglaan', '2309KC', 'Rijswijk'),
-(17, 'user@gmail.com', '[\"ROLE_INSTRUCTEUR\"]', '$argon2id$v=19$m=65536,t=4,p=1$WGc4bUhodUtoUVZ2OWs2cA$Yi64DicQvCWTgG91ubQYTjlsfMbJF7+gA0Z2UHrNTOA', NULL, 'User', 'van', 'qwerty', '1900-01-01', 'man', NULL, NULL, 'dildenberglaan', '2309KC', 'Rijswijk'),
-(18, 'user2@gmail.com', '[\"ROLE_USER\"]', '$2y$13$9Pu60s4rPvHSDx1BBzH0TuKq4x7hV0ZjQiiEAnC/z7MBWUkkAAa9q', NULL, 'user2', '1', 'qwerty', '1900-01-01', 'helicopter', NULL, NULL, 'dildoberglaan', '2309KC', '\'s-Gravenhage'),
-(19, 'user3@gmail.com', '[]', '$2y$13$VfRsARsgTE4F.rhwgFWTXu3zY/S1kYbqB8OQhou21fkHtm2mYd8l6', NULL, 'user', NULL, 'qwerty', '1921-09-20', 'man', NULL, NULL, 'qwerty', 'qwerty', 'qwerty'),
-(20, 'user4@gmail.com', '[\"ROLE_USER\"]', '$2y$13$Nwltyy863jzhfTgbecSe6.E7NzB6nHbyT7RF9nZSK.6eycNC1cfo2', NULL, 'qwerty', NULL, 'qwerty', '1900-01-01', 'man', NULL, NULL, 'qwerty', 'qwerty', 'qwerty'),
-(21, 'instructeur2@gmail.com', '[\"ROLE_INSTRUCTEUR\"]', '$2y$13$tWTpGDC0skzQypET2ynwqui7ivGfSrBs9i4k86GnmTOGirm0qfqtu', NULL, 'qwerty', 'qwerty', 'qwerty', '1900-01-01', 'man', NULL, NULL, 'dildenberglaan', '2309KC', 'qwerty');
+(1, 'brahim701222@gmail.com', '[\"ROLE_ADMIN\"]', '$argon2id$v=19$m=65536,t=4,p=1$bUFYRHU0RlNUT3pYbzNCVg$wZtWoetlCegIoVpzNiMbVv9juQhyw+jfN/El0RZwIlY', 'Brahim Oosterveen', 'Brahim', '', 'Oosterveen', '2001-12-22', 'm', '2019-12-10', '2300.00', 'hemstraat 8', '1234FG', 'Schipluiden'),
+(16, 'instructeur@gmail.com', '[\"ROLE_INSTRUCTEUR\"]', '$argon2id$v=19$m=65536,t=4,p=1$OTkvd3ZWTHNqVmpubGdtVg$kwomO+raxFni72M3hAqKzSeIir5Khas/74BFtjkRG8k', NULL, 'jan', 'van', 'qwerty', '2001-12-22', 'man', NULL, NULL, 'dildenberglaan', '2309KC', 'Rijswijk'),
+(17, 'user@gmail.com', '[\"ROLE_USER\"]', '$argon2id$v=19$m=65536,t=4,p=1$WGc4bUhodUtoUVZ2OWs2cA$Yi64DicQvCWTgG91ubQYTjlsfMbJF7+gA0Z2UHrNTOA', NULL, 'User', 'van', 'qwerty', '1900-01-01', 'man', NULL, NULL, 'dildenberglaan', '2309KC', 'Rijswijk'),
+(18, 'user2@gmail.com', '[\"ROLE_USER\"]', '$argon2id$v=19$m=65536,t=4,p=1$Wk5ycTdIQTNPM3V0OVFVWg$Xg/4uMiKXdgbF0uFTsFaApxGskCjp10YIMwQNjrtDYA', NULL, 'user2', '1', 'qwerty', '1900-01-01', 'helicopter', NULL, NULL, 'dildenberglaan', '2309KC', '\'s-Gravenhage'),
+(19, 'user3@gmail.com', '[]', '$argon2id$v=19$m=65536,t=4,p=1$NEdMZTVQSGE3T2o5amdaZA$Y/CM2VYI8Xq/JyY6egySEBcP5Ffd10jg8dbPOkwxto8', NULL, 'user', NULL, 'qwerty', '1921-09-20', 'man', NULL, NULL, 'qwerty', 'qwerty', 'qwerty'),
+(20, 'user4@gmail.com', '[\"ROLE_USER\"]', '$argon2id$v=19$m=65536,t=4,p=1$T0loMkFRR0pvbVBGTzYycg$hKRGA/4pRvDqOSi0/NdSjCSxDZC3o8CIigDc4Wf+wEo', NULL, 'qwerty', NULL, 'qwerty', '1900-01-01', 'man', NULL, NULL, 'qwerty', 'qwerty', 'qwerty');
 
 --
 -- Indexen voor geëxporteerde tabellen
@@ -179,7 +170,8 @@ INSERT INTO `user` (`id`, `email`, `roles`, `password`, `loginnaam`, `naam`, `tu
 --
 ALTER TABLE `lessen`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `IDX_29B9C79BEFD98D1` (`training_id`);
+  ADD KEY `IDX_29B9C79BEFD98D1` (`training_id`),
+  ADD KEY `IDX_29B9C7925FCA809` (`instructeur_id`);
 
 --
 -- Indexen voor tabel `migration_versions`
@@ -192,8 +184,8 @@ ALTER TABLE `migration_versions`
 --
 ALTER TABLE `registreren`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `FK_2A8D9C6BA4625618` (`lessen_id`),
-  ADD KEY `IDX_2A8D9C6B9D86650F` (`user_id`);
+  ADD KEY `IDX_2A8D9C6BA76ED395` (`user_id`),
+  ADD KEY `IDX_2A8D9C6B87481937` (`lessen_id`);
 
 --
 -- Indexen voor tabel `training`
@@ -216,25 +208,25 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT voor een tabel `lessen`
 --
 ALTER TABLE `lessen`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT voor een tabel `registreren`
 --
 ALTER TABLE `registreren`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT voor een tabel `training`
 --
 ALTER TABLE `training`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT voor een tabel `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- Beperkingen voor geëxporteerde tabellen
@@ -244,6 +236,7 @@ ALTER TABLE `user`
 -- Beperkingen voor tabel `lessen`
 --
 ALTER TABLE `lessen`
+  ADD CONSTRAINT `FK_29B9C7925FCA809` FOREIGN KEY (`instructeur_id`) REFERENCES `user` (`id`),
   ADD CONSTRAINT `FK_29B9C79BEFD98D1` FOREIGN KEY (`training_id`) REFERENCES `training` (`id`);
 
 --

@@ -39,10 +39,14 @@
                     <td>{{ user.tussenvoegsel }}</td>
                     <td>{{ user.achternaam }}</td>
                     <td>
-                        <a href="{{ path('user_show', {'id': user.id}) }}">V</a>
+                        <a class="btn btn-outline-success" href="{{ path('user_show', {'id': user.id}) }}">V</a>
                         {#                    <a href="{{ path('user_edit', {'id': user.id}) }}">edit</a>#}
                     </td>
-                    <td>    {{ include('user/_delete_form.html.twig') }}</td>
+                    <td>   <form method="post" action="{{ path('user_delete', {'id': user.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+                            <input type="hidden" name="_method" value="DELETE">
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ user.id) }}">
+                            <button class="btn btn-danger">Delete</button>
+                        </form></td>
                 </tr>
             {%  elseif "ROLE_INSTRUCTEUR" in user.roles and app.request.get('_route') == 'instructeur_index' %}
                 <tr>
@@ -54,7 +58,11 @@
                         <a href="{{ path('user_show', {'id': user.id}) }}">V</a>
                         {#                    <a href="{{ path('user_edit', {'id': user.id}) }}">edit</a>#}
                     </td>
-                    <td>    {{ include('user/_delete_form.html.twig') }}</td>
+                    <td>    <form method="post" action="{{ path('user_delete', {'id': user.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+                            <input type="hidden" name="_method" value="DELETE">
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ user.id) }}">
+                            <button class="btn btn-danger">Delete</button>
+                        </form></td>
                 </tr>
             {% endif %}
         {% else %}
